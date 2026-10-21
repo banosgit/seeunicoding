@@ -22,6 +22,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Remove committed node_modules (Windows files can't run on Linux)
+        run: rm -rf node_modules apps/site/node_modules
       - run: npm install
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
