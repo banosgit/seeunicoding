@@ -8,11 +8,7 @@ const steps = [
 ];
 
 function ClassroomButton() {
-  return (
-    <button className="btn" type="button" disabled aria-describedby="soon">
-      강의실 입장하기
-    </button>
-  );
+  return <a className="btn" href="#/classroom">강의실 입장하기</a>;
 }
 
 export default function App() {
@@ -22,7 +18,7 @@ export default function App() {
         <a className="brand" href="#top">SeeUNI Coding</a>
         <nav aria-label="주요 메뉴">
           <a href="#top" aria-current="page">홈</a>
-          <span className="off" title="준비 중">강의실 (준비 중)</span>
+          <a href="#/classroom">강의실</a>
           <a href="#about">소개</a>
         </nav>
       </header>
@@ -36,7 +32,6 @@ export default function App() {
               헷갈려도 끝까지 배워보아요!
             </p>
             <ClassroomButton />
-            <p id="soon" className="note">강의실은 지금 준비하고 있어요.</p>
           </div>
 
           <figure className="demo" aria-label="Python 코드와 실행 결과 예시">

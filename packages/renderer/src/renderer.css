@@ -1,0 +1,28 @@
+.lv { font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif; color: #14213d; line-height: 1.75; word-break: keep-all; }
+.lv-title { font-size: 1.9rem; margin: 0 0 20px; letter-spacing: -.02em; }
+.lv-h { margin: 28px 0 10px; }
+.lv-p { margin: 0 0 14px; white-space: pre-wrap; }
+.lv pre { margin: 0; font-family: "D2Coding", "Cascadia Mono", Consolas, ui-monospace, monospace; font-size: .98rem; line-height: 1.8; overflow-x: auto; }
+.lv-code { margin: 0 0 14px; background: #14213d; color: #eef2fb; border-radius: 10px; padding: 12px 18px 14px; }
+.lv-code figcaption, .lv-out span { display: block; font-size: .8rem; margin-bottom: 4px; color: #9fb0d4; }
+.lv-out { margin: 0 0 14px; background: #fff; border: 1px solid #14213d; border-radius: 10px; padding: 12px 18px 14px; }
+.lv-out span { color: #55627c; }
+.lv-err { color: #b3261e; font-weight: 700; }
+
+/* Markdown 문단 */
+.lv-md { margin: 0 0 14px; }
+.lv-md > :first-child { margin-top: 0; }
+.lv-md > :last-child { margin-bottom: 0; }
+.lv-md p { margin: 0 0 10px; }
+.lv-md ul, .lv-md ol { margin: 0 0 10px; padding-left: 1.5em; }
+.lv-md blockquote { margin: 0 0 10px; padding: 2px 14px; border-left: 4px solid var(--mark, #ffc94a); color: #55627c; }
+.lv-md code { font-family: "D2Coding", "Cascadia Mono", Consolas, ui-monospace, monospace; background: #eef2fb; padding: 1px 6px; border-radius: 5px; font-size: .92em; }
+.lv-md pre { background: #14213d; color: #eef2fb; padding: 12px 18px; border-radius: 10px; margin: 0 0 10px; }
+.lv-md pre code { background: none; padding: 0; color: inherit; }
+.lv-md table { border-collapse: collapse; margin: 0 0 10px; display: block; overflow-x: auto; }
+.lv-md th, .lv-md td { border: 1px solid #d9e0ec; padding: 6px 12px; }
+.lv-md th { background: #f1f4fa; }
+.lv-md hr { border: 0; border-top: 2px solid var(--mark, #d9e0ec); margin: 16px 0; }
+.lv-md li::marker { color: var(--mark, inherit); }
+.lv-md a { color: #2f5fcf; }
+.lv-md img { max-width: 100%; }

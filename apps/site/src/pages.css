@@ -1,0 +1,31 @@
+a.btn { display: inline-block; text-decoration: none; }
+a.btn:hover { background: #244bb0; }
+main.page { width: min(760px, 100% - 40px); padding: 40px 0 72px; }
+.pg-title { font-size: 1.9rem; margin: 0 0 24px; letter-spacing: -.02em; }
+.pg-empty { color: var(--muted); }
+.pg-back { margin: 0 0 18px; font-size: .92rem; }
+.pg-back a, .pg-pn a { color: var(--muted); text-decoration: none; }
+.pg-back a:hover, .pg-pn a:hover { color: var(--blue); }
+.pg-pn { display: flex; justify-content: space-between; gap: 16px; margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); }
+
+/* 강의실: 언어 버튼 */
+.lang-bar { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 28px; }
+.lang-btn { padding: 12px 28px; border: 2px solid #004842; border-radius: 12px; background: var(--panel); color: var(--ink); font-size: 1.2rem; font-weight: 700; text-decoration: none; }
+.lang-btn:hover { background: var(--sun); }
+.lang-btn[aria-current="page"] { background: #f00cc2; color: #fff; box-shadow: 4px 4px 0 var(--sun); }
+
+/* 강의실: 카테고리 블록 (열기/닫기) */
+.cat-block { margin: 0 0 24px; border: 2px solid var(--ink); border-radius: 14px; overflow: hidden; background: var(--panel); }
+.cat-head { display: flex; align-items: stretch; background: #ffc540; font-size: 1.1rem; font-weight: 700; cursor: pointer; list-style: none; }
+.cat-head::-webkit-details-marker { display: none; }
+.cat-head::after { content: "▾"; align-self: center; margin-left: auto; padding: 0 20px; transition: transform .15s; }
+.cat-block:not([open]) .cat-head::after { transform: rotate(-90deg); }
+@media (prefers-reduced-motion: reduce) { .cat-head::after { transition: none; } }
+.cat-list { list-style: none; margin: 0; padding: 0; }
+.cat-list li { border-top: 3px solid #505050; }
+.cat-list a { display: flex; align-items: stretch; text-decoration: none; }
+.cat-list a:hover { background: #f1f4fa; color: var(--blue); }
+
+/* 숫자 | 제목 */
+.cat-head .n, .cat-list .n { flex: none; width: 56px; display: grid; place-items: center; font-weight: 800; border-right: 3px solid #505050; }
+.cat-head .t, .cat-list .t { display: flex; align-items: center; padding: 14px 18px; }

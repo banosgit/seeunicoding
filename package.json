@@ -1,10 +1,11 @@
 {
   "name": "seeunicoding",
   "private": true,
-  "workspaces": ["apps/*"],
+  "workspaces": ["apps/*", "packages/*"],
   "scripts": {
     "dev": "npm run dev -w site",
     "build": "npm run build -w site",
-    "preview": "npm run preview -w site"
+    "preview": "npm run preview -w site",
+    "editor": "npm run dev -w editor"
   }
 }
