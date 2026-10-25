@@ -84,7 +84,7 @@ export function toMarkdownSource(src) {
     if (!balanced(inner)) inner = inner.replace(/[[\]]/g, '\\$&');
     result += `[${inner}](seeuni-color:${color.slice(1)})`;
   }
-  return result.replace(/\uE000([mh]):([0-9a-fA-F]+)\uE001/g, (_, k, hex) => `[](seeuni-${k === 'm' ? 'mark' : 'hr'}:${hex})`);
+  return result.replace(/\uE000([qlh]):([0-9a-fA-F]+)\uE001/g, (_, k, hex) => (k === 'h' ? `[](seeuni-hr:${hex})` : `[](seeuni-mark:${k}:${hex})`));
 }
 
 // 마크다운 기호 색: 줄 맨 앞의 {#hex}(>)  {#hex}(-)  {#hex}(1.)  {#hex}(---) 를 기호 색 지정으로 해석합니다.
@@ -97,7 +97,7 @@ function markPass(src) {
     let m = HR_LINE.exec(line);
     if (m) return `\n\n\uE000h:${m[1]}\uE001\n\n${m[2]}\n`;
     m = MARK_LINE.exec(line);
-    if (m) return `${m[1]}${m[3]} \uE000m:${m[2]}\uE001${line.slice(m[0].length)}`;
+    if (m) return `${m[1]}${m[3]} ${line.slice(m[0].length)}\uE000${m[3] === '>' ? 'q' : 'l'}:${m[2]}\uE001`;
     return line;
   }).join('\n');
 }
@@ -105,9 +105,9 @@ function markPass(src) {
 // react-markdown용 플러그인: 표시용 빈 링크를 찾아 인용/목록/구분선에 색(--mark)을 붙이고 링크는 지웁니다.
 const MARK = 'seeuni-mark:';
 const HR = 'seeuni-hr:';
-const paint = (node, hex) => {
+const paint = (node, style) => {
   node.data = node.data || {};
-  node.data.hProperties = { ...(node.data.hProperties || {}), style: `--mark:${hex}` };
+  node.data.hProperties = { ...(node.data.hProperties || {}), style };
 };
 export function remarkMarks() {
   return (tree) => {
@@ -118,13 +118,19 @@ export function remarkMarks() {
         const only = c.type === 'paragraph' && c.children.length === 1 ? c.children[0] : null;
         if (only && only.type === 'link' && only.url?.startsWith(HR)) {
           const next = node.children[i + 1];
-          if (next && next.type === 'thematicBreak') paint(next, '#' + only.url.slice(HR.length));
+          if (next && next.type === 'thematicBreak') paint(next, `border-top-color:#${only.url.slice(HR.length)}`);
           node.children.splice(i, 1);
           i--;
         } else if (c.type === 'link' && c.url?.startsWith(MARK)) {
+          const [kind, hex] = c.url.slice(MARK.length).split(':');
+          const want = kind === 'q' ? 'blockquote' : 'listItem';
           const chain = anc.concat(node);
           for (let k = chain.length - 1; k >= 0; k--) {
-            if (chain[k].type === 'blockquote' || chain[k].type === 'listItem') { paint(chain[k], '#' + c.url.slice(MARK.length)); break; }
+            if (chain[k].type === want) {
+              // 인용은 막대 색만, 목록은 점/번호 색만 바꿉니다. (안쪽 글·다른 기호에 번지지 않게)
+              paint(chain[k], kind === 'q' ? `border-left-color:#${hex}` : `--mark-list:#${hex}`);
+              break;
+            }
           }
           node.children.splice(i, 1);
           i--;

@@ -1,1 +1,39 @@
-{ }
+{
+  "images": [
+    {
+      "id": "img-0001",
+      "file": "UNIsv.webp",
+      "alt": "",
+      "tags": [],
+      "source": ""
+    },
+    {
+      "id": "img-0002",
+      "file": "pythoninstall.png",
+      "alt": "",
+      "tags": [],
+      "source": ""
+    },
+    {
+      "id": "img-0003",
+      "file": "cmdopen.png",
+      "alt": "",
+      "tags": [],
+      "source": ""
+    },
+    {
+      "id": "img-0004",
+      "file": "fileadd.png",
+      "alt": "",
+      "tags": [],
+      "source": ""
+    },
+    {
+      "id": "img-0005",
+      "file": "firstrun.png",
+      "alt": "",
+      "tags": [],
+      "source": ""
+    }
+  ]
+}

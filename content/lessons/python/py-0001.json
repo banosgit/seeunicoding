@@ -1,0 +1,153 @@
+{
+  "formatVersion": 1,
+  "id": "py-0001",
+  "title": "파이썬 시작하기",
+  "lang": "python",
+  "category": "basic",
+  "blocks": [
+    {
+      "id": "bpmknx1",
+      "type": "paragraph",
+      "text": "##### 꺄악 마스터! 유니와 함께 프로그래밍을 배워보아요! 우선은 프로그래밍에서 제일 쉬운 파이썬부터 배워요 마스터!\n##### 질문이나 안되는 점은 디스코드에 남기면 다 알려주니까 겁먹지 말고 따라가요!",
+      "markdown": true
+    },
+    {
+      "id": "bxrtnve",
+      "type": "paragraph",
+      "text": "---\n### 강의 목차\n{#fc03f8}(>) * 1. 파이썬 설치\n> * 2. 코드 작성\n> * 3. 파일 실행\n##### 새로운 명령어\n```print()```\n###### 아차 마스터, 이번 강의는 윈도우를 기준으로 설명할 거에요. 다른 OS는 나중에 설명할게요.\n---\n",
+      "markdown": true
+    },
+    {
+      "id": "b77ln2r",
+      "type": "heading",
+      "level": 3,
+      "text": "1. 파이썬 설치 하는 방법"
+    },
+    {
+      "id": "bwb3ptb",
+      "type": "paragraph",
+      "text": "우선 파이썬 부터 설치해야 해요!  \n\n파이썬은\nhttps://www.python.org/downloads\n에서 설치가 가능해요!(구글->python검색->Downloads)\n\n\n\n\n\n\n\n\n사진에서 유니가 강조한 부분을 클릭해서 다운로드 받을 수 있어요.\n\n파일이 다 설치되었다면 실행해서\nAdd python 3.13 to PATH(아래에 있어요!)\n를 체크하고 Install Now를 클릭해서 설치하세요!\n\n다 설치 되었다면\nwindow->cmd검색&실행\n\n\n\n\n\n\n\n\n뭔가 멋있어 보이는 창이 열릴 거에요. 그러면 아래 코드를 그대로 적어주세요!",
+      "markdown": false
+    },
+    {
+      "id": "bhedque",
+      "type": "code",
+      "language": "cmd",
+      "code": "python --version"
+    },
+    {
+      "id": "bljg1ot",
+      "type": "output",
+      "text": "python(뒤에 숫자가 있을 수도 있어요)"
+    },
+    {
+      "id": "bvc0hta",
+      "type": "paragraph",
+      "text": "만약 안된다면 파이썬이 설치 안되었거나 오타가 있을 가능성이 높아요.  \n파이썬은 용량을 많이 안써서 꼭 다운로드 받는걸 추천해요.\n\n----",
+      "markdown": true
+    },
+    {
+      "id": "ba0g7ks",
+      "type": "heading",
+      "level": 3,
+      "text": "2. 파일 작성"
+    },
+    {
+      "id": "bgumxpj",
+      "type": "paragraph",
+      "text": "마스터, 이제 프로그래밍을 시작할거에요!!\n'VS'(Visual Studio)를 사용하면 좋지만, 메모장으로도 가능해요.\n\n우선, 코드를 작성할 파일을 만들거에요.\n우리의 파일들이 들어있는 파일 탐색기를 켜주세요.(단축키 window+e) 그 다음,\n\n빈공간 우클릭-> 새로 만들기 -> 텍스트 문서\n로 파일 하나를 만들고 더블클릭 해주세요.\n\n\n파일 안에는 아래 코드를 작성해주세요.",
+      "markdown": false
+    },
+    {
+      "id": "bpet6mm",
+      "type": "code",
+      "language": "python",
+      "code": "print(\"처음으로 프로그래밍한 마스터 최고!\")"
+    },
+    {
+      "id": "bum40c4",
+      "type": "paragraph",
+      "text": "를 작성해주세요!\n 다 쓰고 저장하는 습관은 중요해요!\nCtrl+s 로 자주 저장하는 습관을 기르도록 해요.\n\n다 썼다면 파일 이름을\nfirstcode.py\n로 수정해요!\n\n---\n###### 마스터! 파일 이름을 바꾸기 전에는 해당 파일을 실행중인 메모장이나 VS 전부 끄고 바꿔야해요! 만약 에러가 뜬다면 무언가 켜져있는지 확인해주세요.\n---\n",
+      "markdown": true
+    },
+    {
+      "id": "b076bit",
+      "type": "heading",
+      "level": 2,
+      "text": "3. 파일 실행"
+    },
+    {
+      "id": "bga5fjn",
+      "type": "paragraph",
+      "text": "이제 마스터가 작성한 파일을 실행시켜봐요!\n\ncmd를 켜서 적어주세요!",
+      "markdown": false
+    },
+    {
+      "id": "ba2e05z",
+      "type": "code",
+      "language": "python",
+      "code": "py 파일경로"
+    },
+    {
+      "id": "b7exv06",
+      "type": "paragraph",
+      "text": "파일 경로는 first.py를 우클릭 하고 '경로로 복사'해서 붙여넣어주세요!(단축키: Ctrl+Shift+c, 또는 cmd창으로 파일을 드래그앤 드랍)\n엔터로 실행 할 수 있어요! 실행이 안된다면 \npy(띄어쓰기)파일경로\n가 맞는지 확인해주세요.\n\n'\n\n\n\n\n",
+      "markdown": false
+    },
+    {
+      "id": "bo4d2rw",
+      "type": "output",
+      "text": "처음으로 프로그래밍한 마스터 최고!"
+    },
+    {
+      "id": "bk2rhhe",
+      "type": "paragraph",
+      "text": "꺄악, 유니의 진심이 나왔어요. 앞으로 파이썬은 이렇게 실행하면 돼요! VS는 디버거를 설치해서 더 쉽게 할 수 있어요. python IDLE를 사용하면 더더 쉽게 할 수 있어요. VS는 나중에 설명해드릴게요 마스터.\n\n###### 유니 컨셉으로 강의를 적다보니 어렵네요. 이번 강의는 계속 수정 할 예정입니다. 피드백이나 의견을 디코로 알려주세요.(시유니 컨셉 버리는건 안돼요)\n---",
+      "markdown": true
+    },
+    {
+      "id": "b86uhhl",
+      "type": "heading",
+      "level": 2,
+      "text": "마무리"
+    },
+    {
+      "id": "b4bbx95",
+      "type": "paragraph",
+      "text": "이번 강의에서 파일 실행하는 방법은 숙지해야해요 마스터.\n\n그러면 숙제를 하나 낼거에요!\n\n파일을 실행하면 ```유니 사랑해```가 출력되게 바꿔오세요.\n아직 배우는 단계이니까 우선 구글에 먼저 검색하는 것을 추천드려요! 마스터 다음 강의는 시유 선배가 할거니까 다다음 강의에서 만나요!\n###### 첫 강의라 수정점이 많겠죠. 다음 강의로 넘어가기전 최대한 수정을 할 예정이니 의견과 피드백 디코에 남겨주세요. 최대한 유니에게 반영하라고 하겠습니다.",
+      "markdown": true
+    },
+    {
+      "id": "bdec0kb",
+      "type": "image",
+      "imageId": "img-0002",
+      "x": 0,
+      "y": 94.4,
+      "w": 57
+    },
+    {
+      "id": "boctjfx",
+      "type": "image",
+      "imageId": "img-0003",
+      "x": 0,
+      "y": 153.1,
+      "w": 32
+    },
+    {
+      "id": "bwmgimg",
+      "type": "image",
+      "imageId": "img-0004",
+      "x": 43,
+      "y": 250.2,
+      "w": 52.3
+    },
+    {
+      "id": "by3gtj5",
+      "type": "image",
+      "imageId": "img-0005",
+      "x": 0,
+      "y": 362.5,
+      "w": 65.5
+    }
+  ]
+}
