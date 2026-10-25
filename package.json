@@ -1,11 +1,15 @@
 {
   "name": "seeunicoding",
   "private": true,
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "npm run dev -w site",
     "build": "npm run build -w site",
     "preview": "npm run preview -w site",
-    "editor": "npm run dev -w editor"
+    "editor": "npm run dev -w editor",
+    "images": "node scripts/register-images.mjs"
   }
 }

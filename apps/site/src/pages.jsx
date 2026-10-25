@@ -25,24 +25,28 @@ export function ClassroomPage({ lang }) {
           </nav>
           {!lang && <p className="pg-empty">유니와 같이 배워요!</p>}
           {lang && !current && <p className="pg-empty">이 언어의 강의는 아직 없어요.</p>}
-          {current && current.categories.map((cat, ci) => (
-            <details key={`${lang}/${cat.id}`} className="cat-block" open>
-              <summary className="cat-head">
-                <span className="n">{ci + 1}</span>
-                <span className="t">{cat.name}</span>
-              </summary>
-              <ol className="cat-list">
-                {cat.lessons.map((l, i) => (
-                  <li key={l.id}>
-                    <a href={`#/lesson/${l.id}`}>
-                      <span className="n">{i + 1}</span>
-                      <span className="t"><Colored text={l.title} /></span>
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </details>
-          ))}
+          {current && (
+            <div className="cat-tree">
+              {current.categories.map((cat, ci) => (
+              <details key={`${lang}/${cat.id}`} className="cat-block" open>
+                <summary className="cat-head">
+                  <span className="n">{ci + 1}</span>
+                  <span className="t">{cat.name}</span>
+                </summary>
+                <ol className="cat-list">
+                  {cat.lessons.map((l, i) => (
+                    <li key={l.id}>
+                      <a href={`#/lesson/${l.id}`}>
+                        <span className="n">{i + 1}.</span>
+                        <span className="t"><Colored text={l.title} /></span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </details>
+            ))}
+            </div>
+          )}
         </>
       )}
     </Layout>

@@ -1,7 +1,11 @@
 import ReactMarkdown, { defaultUrlTransform } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { parseColor, remarkMarks, toMarkdownSource } from './colorSyntax.js';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { ImageBox } from './ImageStage.jsx';
 import './renderer.css';
+
+export { getImage, imageList } from './imageLibrary.js';
 
 function renderNodes(nodes) {
   return nodes.map((n, i) =>
@@ -64,11 +68,56 @@ function Block({ block }) {
   }
 }
 
-export function LessonView({ lesson }) {
+const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
+// 이미지가 글보다 아래로 내려가도 화면이 이미지 끝까지 늘어나도록, 이미지의 맨 아래 위치를 재서 최소 높이로 씁니다.
+function useImageExtent(ref, blocks) {
+  const [minH, setMinH] = useState(0);
+  useIsoLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+    const measure = () => {
+      const top = el.getBoundingClientRect().top;
+      let bottom = 0;
+      el.querySelectorAll('.lv-imgbox').forEach((n) => {
+        bottom = Math.max(bottom, n.getBoundingClientRect().bottom - top);
+      });
+      setMinH(Math.ceil(bottom));
+    };
+    measure();
+    let raf = 0;
+    const later = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(measure); };
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(later) : null;
+    ro?.observe(el);
+    const imgs = [...el.querySelectorAll('.lv-imgbox img')];
+    imgs.forEach((i) => i.addEventListener('load', later));
+    return () => {
+      cancelAnimationFrame(raf);
+      ro?.disconnect();
+      imgs.forEach((i) => i.removeEventListener('load', later));
+    };
+  }, [ref, blocks]);
+  return minH;
+}
+
+// edit(선택사항): 에디터 미리보기에서 이미지를 직접 조작할 때 { selectedId, onSelect(id|null), onChange(id, patch) }
+export function LessonView({ lesson, edit }) {
+  const articleRef = useRef(null);
+  const minH = useImageExtent(articleRef, lesson.blocks);
+  const images = lesson.blocks.filter((b) => b.type === 'image');
+  const rest = lesson.blocks.filter((b) => b.type !== 'image');
   return (
-    <article className="lv">
+    <article
+      ref={articleRef}
+      className={'lv' + (edit ? ' lv--edit' : '')}
+      style={minH ? { minHeight: minH } : undefined}
+      onPointerDown={edit ? () => edit.onSelect(null) : undefined}
+    >
+      <div className="lv-imglayer">
+        {images.map((b) => <ImageBox key={b.id} block={b} edit={edit} articleRef={articleRef} />)}
+      </div>
       <h1 className="lv-title">{lesson.title ? <Colored text={lesson.title} /> : '(제목 없음)'}</h1>
-      {lesson.blocks.map((b) => <Block key={b.id} block={b} />)}
+      {rest.map((b) => <Block key={b.id} block={b} />)}
     </article>
   );
 }

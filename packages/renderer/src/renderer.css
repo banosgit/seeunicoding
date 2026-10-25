@@ -26,3 +26,20 @@
 .lv-md li::marker { color: var(--mark, inherit); }
 .lv-md a { color: #2f5fcf; }
 .lv-md img { max-width: 100%; }
+
+/* 이미지: 강의 화면 전체를 기준으로 어디든 배치, 글 뒤(맨 아래 레이어)에 깔림 */
+.lv { position: relative; isolation: isolate; }
+.lv--edit { outline: 1px dashed #c7d0e2; outline-offset: 6px; }
+.lv-imglayer { position: absolute; inset: 0; pointer-events: none; }
+.lv > :not(.lv-imglayer) { position: relative; z-index: 1; }
+.lv--edit > :not(.lv-imglayer) { pointer-events: none; }
+.lv-imgbox { position: absolute; top: 0; line-height: 0; }
+.lv-imgbox img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
+.lv--edit .lv-imgbox { pointer-events: auto; cursor: move; touch-action: none; }
+.lv-selframe { position: absolute; inset: 0; z-index: 3; border: 2px solid #2f5fcf; pointer-events: none; }
+.lv-handle { position: absolute; z-index: 3; width: 14px; height: 14px; background: #fff; border: 2px solid #2f5fcf; border-radius: 3px; touch-action: none; }
+.lv-handle--nw { left: -8px; top: -8px; cursor: nwse-resize; }
+.lv-handle--se { right: -8px; bottom: -8px; cursor: nwse-resize; }
+.lv-handle--ne { right: -8px; top: -8px; cursor: nesw-resize; }
+.lv-handle--sw { left: -8px; bottom: -8px; cursor: nesw-resize; }
+.lv-miss { aspect-ratio: 4 / 3; display: grid; place-items: center; padding: 8px; text-align: center; font-size: .8rem; line-height: 1.4; color: #b3261e; background: #fdecea; border: 2px dashed #b3261e; }

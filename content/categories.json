@@ -4,8 +4,6 @@
     { "id": "python", "name": "Python", "order": 1 }
   ],
   "categories": [
-    { "id": "basic-syntax", "lang": "python", "name": "기초 문법", "order": 1 },
-    { "id": "data-structures", "lang": "python", "name": "자료구조", "order": 2 },
-    { "id": "algorithm-basics", "lang": "python", "name": "알고리즘 기초", "order": 3 }
+    { "id": "basic", "lang": "python", "name": "python 시작하기", "order": 1 }
   ]
 }

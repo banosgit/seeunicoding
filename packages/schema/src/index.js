@@ -1,14 +1,16 @@
 export const FORMAT_VERSION = 1;
-export const BLOCK_TYPES = ['heading', 'paragraph', 'code', 'output'];
+export const BLOCK_TYPES = ['heading', 'paragraph', 'code', 'output', 'image'];
+// 이미지 블록: x·y·w 는 강의 화면 가로폭에 대한 % 값 (x=왼쪽, y=위쪽, w=너비). 글 뒤(맨 아래 레이어)에 놓입니다.
 const ID_RE = /^[a-z]+-\d{4}$/;
 
-export function newBlock(type) {
+export function newBlock(type, extra = {}) {
   const id = 'b' + Math.random().toString(36).slice(2, 8);
   switch (type) {
     case 'heading': return { id, type, level: 2, text: '' };
     case 'paragraph': return { id, type, text: '', markdown: false };
     case 'code': return { id, type, language: 'python', code: '' };
     case 'output': return { id, type, text: '' };
+    case 'image': return { id, type, imageId: '', x: 30, y: 12, w: 40, ...extra };
     default: throw new Error('unknown block type: ' + type);
   }
 }
@@ -34,6 +36,12 @@ export function validateLesson(data) {
     if (!b.id || seen.has(b.id)) errors.push(`${at}: id가 없거나 중복입니다.`);
     seen.add(b.id);
     if (b.type === 'paragraph' && b.markdown !== undefined && typeof b.markdown !== 'boolean') errors.push(`${at}: markdown 항목은 true/false여야 합니다.`);
+    if (b.type === 'image') {
+      if (typeof b.imageId !== 'string' || !b.imageId) errors.push(`${at}: imageId가 비어 있습니다.`);
+      for (const k of ['x', 'y', 'w']) if (typeof b[k] !== 'number' || !Number.isFinite(b[k])) errors.push(`${at}: ${k}는 숫자여야 합니다.`);
+      if (typeof b.w === 'number' && (b.w < 1 || b.w > 100)) errors.push(`${at}: w는 1~100 사이여야 합니다.`);
+      return;
+    }
     const field = b.type === 'code' ? 'code' : 'text';
     if (typeof b[field] !== 'string') errors.push(`${at}: ${field} 항목이 문자열이 아닙니다.`);
     else if ((b.type === 'heading' || b.type === 'code') && !b[field].trim()) errors.push(`${at}: ${field} 항목이 비어 있습니다.`);

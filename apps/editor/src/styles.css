@@ -37,3 +37,32 @@ textarea { resize: vertical; }
 .md-row .hint { color: #55627c; font-size: .85rem; }
 button.toggle[aria-pressed="true"] { background: #ffc94a; border-color: #d9a520; font-weight: 700; }
 button:disabled { opacity: .45; cursor: not-allowed; border-color: #b9c3d8; }
+
+/* 이미지 블록, 선택 창 */
+.block.sel { border-color: #2f5fcf; box-shadow: 0 0 0 2px #cfdcf8; }
+.img-card { display: flex; gap: 12px; align-items: flex-start; }
+.img-card > img, .img-card > .noimg { flex: none; width: 88px; height: 66px; object-fit: contain; background: #f1f4fa; border: 1px solid #d9e0ec; border-radius: 8px; display: grid; place-items: center; font-size: .8rem; color: #55627c; }
+.img-info { display: grid; gap: 6px; min-width: 0; flex: 1; }
+.img-info .hint, .img-info p { margin: 0; color: #55627c; font-size: .85rem; }
+.row2 { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
+.row2 label { display: grid; gap: 2px; font-size: .85rem; color: #55627c; }
+.row2 select { width: auto; }
+.modal-back { position: fixed; inset: 0; background: rgba(20, 33, 61, .45); display: grid; place-items: center; z-index: 10; padding: 20px; }
+.modal { background: #fff; border-radius: 14px; width: min(760px, 100%); max-height: 86vh; display: flex; flex-direction: column; overflow: hidden; }
+.modal-head { display: flex; gap: 12px; align-items: center; padding: 14px 18px; border-bottom: 1px solid #d9e0ec; }
+.modal-head input { flex: 1; }
+.modal-empty { padding: 28px 22px; margin: 0; color: #55627c; line-height: 1.7; }
+.img-grid { list-style: none; margin: 0; padding: 16px; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; overflow: auto; }
+.img-grid button { width: 100%; display: grid; gap: 4px; padding: 8px; text-align: left; }
+.img-grid img, .img-grid .noimg { width: 100%; height: 96px; object-fit: contain; background: #f1f4fa; border-radius: 6px; display: grid; place-items: center; }
+.img-grid .cap { font-weight: 700; font-size: .85rem; }
+.img-grid .cap2 { font-size: .8rem; color: #55627c; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* 미리보기를 사이트와 같은 가로폭(760px)으로 보여줘서 글 줄바꿈과 이미지 위치가 실제 화면과 같게 */
+.cols { grid-template-columns: 1fr; }
+.preview { position: static; max-height: none; overflow: auto; }
+.preview .lv { width: 760px; }
+@media (min-width: 1250px) {
+  .cols { grid-template-columns: minmax(380px, 1fr) 800px; }
+  .preview { position: sticky; top: 76px; max-height: calc(100vh - 96px); }
+}

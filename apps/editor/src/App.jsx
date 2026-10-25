@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react';
-import { LessonView } from '@seeuni/renderer';
+import { LessonView, getImage } from '@seeuni/renderer';
 import { BLOCK_TYPES, newBlock, newLesson, validateLesson } from '@seeuni/schema';
+import ImagePicker from './ImagePicker.jsx';
 import config from '../../../content/categories.json';
 
-const LABEL = { heading: '제목', paragraph: '문단', code: '코드 예제', output: '예상 출력' };
+const LABEL = { heading: '제목', paragraph: '문단', code: '코드 예제', output: '예상 출력', image: '이미지' };
 const FILE_TYPES = [{ description: '강의 JSON', accept: { 'application/json': ['.json'] } }];
 const hasFS = 'showOpenFilePicker' in window;
 const byOrder = (a, b) => (a.order ?? 1e9) - (b.order ?? 1e9);
@@ -16,6 +17,8 @@ export default function App() {
   const [status, setStatus] = useState('');
   const [trash, setTrash] = useState([]);
   const [showIdTip, setShowIdTip] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+  const [picker, setPicker] = useState(null);
   const handle = useRef(null);
   const confirmed = useRef(false);
 
@@ -26,6 +29,14 @@ export default function App() {
       const keep = cats.some((c) => c.id === l.category);
       return { ...l, lang, category: keep ? l.category : cats[0]?.id ?? l.category };
     });
+  const patchBlock = (id, patch) =>
+    setLesson((l) => ({ ...l, blocks: l.blocks.map((b) => (b.id === id ? { ...b, ...patch } : b)) }));
+  const addImage = (imageId) => {
+    const nb = newBlock('image', { imageId });
+    setLesson((l) => ({ ...l, blocks: [...l.blocks, nb] }));
+    setSelectedId(nb.id);
+  };
+  const edit = { selectedId, onSelect: setSelectedId, onChange: patchBlock };
   const setBlock = (i, patch) =>
     setLesson((l) => ({ ...l, blocks: l.blocks.map((b, j) => (j === i ? { ...b, ...patch } : b)) }));
   const addBlock = (t) => setLesson((l) => ({ ...l, blocks: [...l.blocks, newBlock(t)] }));
@@ -63,6 +74,7 @@ export default function App() {
     if (!confirm('현재 내용이 사라집니다. 새로 만들까요?')) return;
     setLesson(newLesson());
     setTrash([]);
+    setSelectedId(null);
     handle.current = null;
     confirmed.current = false;
     setErrors([]);
@@ -81,6 +93,7 @@ export default function App() {
       if (errs.length) { setErrors(errs.map((e) => `${h.name}: ${e}`)); return; }
       setLesson(data);
       setTrash([]);
+      setSelectedId(null);
       handle.current = h;
       confirmed.current = false;
       setErrors([]);
@@ -90,7 +103,9 @@ export default function App() {
 
   async function save(saveAs) {
     if (!hasFS) return alert('크롬 또는 엣지에서 실행해 주세요.');
-    const errs = validateLesson(lesson);
+    const imgErrs = lesson.blocks.flatMap((b, i) =>
+      b.type === 'image' && !getImage(b.imageId) ? [`블록 ${i + 1}: 이미지 라이브러리에 없는 이미지입니다. (${b.imageId})`] : []);
+    const errs = [...validateLesson(lesson), ...imgErrs];
     if (errs.length) { setErrors(errs); setStatus(''); return; }
     setErrors([]);
     try {
@@ -167,7 +182,7 @@ export default function App() {
           </div>
 
           {lesson.blocks.map((b, i) => (
-            <div className="block" key={b.id}>
+            <div className={'block' + (selectedId === b.id ? ' sel' : '')} key={b.id} onClick={() => setSelectedId(b.type === 'image' ? b.id : null)}>
               <div className="block-head">
                 <strong>{i + 1}. {LABEL[b.type]}</strong>
                 <span>
@@ -209,19 +224,39 @@ export default function App() {
               {b.type === 'output' && (
                 <textarea className="mono" rows={3} value={b.text} onChange={(e) => setBlock(i, { text: e.target.value })} placeholder="예상 출력" />
               )}
+              {b.type === 'image' && (
+                <div className="img-card">
+                  {getImage(b.imageId)?.url ? <img src={getImage(b.imageId).url} alt="" /> : <span className="noimg">없음</span>}
+                  <div className="img-info">
+                    <div><strong>{b.imageId}</strong> <span className="hint">{getImage(b.imageId)?.alt}</span></div>
+                    <div className="row2">
+                      <button onClick={() => setPicker({ onPick: (id) => patchBlock(b.id, { imageId: id }) })}>이미지 바꾸기</button>
+                    </div>
+                    <p className="hint">오른쪽 미리보기에서 이미지를 끌어 이동하고, 모서리를 끌어 크기를 조절해요. 이미지는 항상 글 뒤에 놓이고, 겹치면 글이 위에 보여요. (선택 후 방향키로 이동, +/- 로 크기. 이미지끼리 겹치면 아래쪽 블록이 위에 올라와요)</p>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
 
           <div className="add">
             <span>블록 추가</span>
-            {BLOCK_TYPES.map((t) => <button key={t} onClick={() => addBlock(t)}>+ {LABEL[t]}</button>)}
+            {BLOCK_TYPES.map((t) => (
+              <button key={t} onClick={() => (t === 'image' ? setPicker({ onPick: addImage }) : addBlock(t))}>+ {LABEL[t]}</button>
+            ))}
           </div>
         </section>
 
         <section className="pane preview" aria-label="미리보기">
-          <LessonView lesson={lesson} />
+          <LessonView lesson={lesson} edit={edit} />
         </section>
       </div>
+      {picker && (
+        <ImagePicker
+          onPick={(id) => { picker.onPick(id); setPicker(null); }}
+          onClose={() => setPicker(null)}
+        />
+      )}
     </div>
   );
 }
