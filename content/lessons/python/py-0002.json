@@ -1,0 +1,214 @@
+{
+  "formatVersion": 1,
+  "id": "py-0002",
+  "title": "Visual Studio Code설치 및 세팅",
+  "lang": "python",
+  "category": "basic",
+  "blocks": [
+    {
+      "id": "b0vgzsh",
+      "type": "paragraph",
+      "text": "##### 이번 강의는 시유가 할 것시유. 이번에 쓰는 프로그램은 유용하니까 꼭 배워두시유!(%VS랑 VS code는 다르시유. VS code가 더 가벼운 버전이라 생각하면 편하시유. 강의에서는 VS를 VS code라 생각하시유.)",
+      "markdown": true
+    },
+    {
+      "id": "bcsl6ia",
+      "type": "heading",
+      "level": 2,
+      "text": "강의 목차"
+    },
+    {
+      "id": "be5twgg",
+      "type": "paragraph",
+      "text": "{#fcba03}(>) * 0. 숙제 검사 \n> * 1. VS 설치\n> * 2. VS 설치\n> * 3. 실제로 실행\n---",
+      "markdown": true
+    },
+    {
+      "id": "bax2uxe",
+      "type": "heading",
+      "level": 3,
+      "text": "0. 숙제 검사"
+    },
+    {
+      "id": "b9wwb71",
+      "type": "paragraph",
+      "text": "숙제 안했으면 얼른 하고 보시유! 답 공개할것시유.",
+      "markdown": true
+    },
+    {
+      "id": "ban6dtr",
+      "type": "code",
+      "language": "python",
+      "code": "print(\"유니 사랑해\")"
+    },
+    {
+      "id": "bz5mtfv",
+      "type": "output",
+      "text": "유니 사랑해"
+    },
+    {
+      "id": "b1x6sqo",
+      "type": "paragraph",
+      "text": "**강의에서도 명령어를 알려주지만 스스로 검색해서 코드를 작성하는 능력도 코딩 실력이시유.** 그럼 이제 진짜 강의 시작하겠시유.\n\n---",
+      "markdown": true
+    },
+    {
+      "id": "byxob8p",
+      "type": "heading",
+      "level": 3,
+      "text": "1. VS 설치"
+    },
+    {
+      "id": "by7sxf7",
+      "type": "paragraph",
+      "text": "VS는 파이썬 뿐만 아니라 프로그래밍 할때 매우매우매우매우매우 유용하니 꼭 설치하시유.\n\n우선 구글에 VS code 검색 또는 https://code.visualstudio.com/\n에서 다운로드 받으시유. ",
+      "markdown": true
+    },
+    {
+      "id": "bam8on8",
+      "type": "image",
+      "imageId": "img-0006",
+      "x": 0,
+      "y": 118.3,
+      "w": 44.9,
+      "anchor": "by7sxf7",
+      "t": 1.1873
+    },
+    {
+      "id": "bncz09b",
+      "type": "paragraph",
+      "text": "\n\n\n\n\n\nDownload for windows를 누르면 설치 파일이 다운로드 될 것시유.\n\n설치가 끝나면 설치 파일을 열고 아래 사진을 따라하시유.\n",
+      "markdown": false
+    },
+    {
+      "id": "b9jvb62",
+      "type": "image",
+      "imageId": "img-0007",
+      "x": 45.4,
+      "y": 157.4,
+      "w": 40,
+      "anchor": "bncz09b",
+      "t": 1.1726
+    },
+    {
+      "id": "bhpm7yd",
+      "type": "image",
+      "imageId": "img-0008",
+      "x": 1.4,
+      "y": 192.1,
+      "w": 40,
+      "anchor": "bncz09b",
+      "t": 2.2189
+    },
+    {
+      "id": "blt11dl",
+      "type": "image",
+      "imageId": "img-0009",
+      "x": 45.1,
+      "y": 197.5,
+      "w": 40,
+      "anchor": "bncz09b",
+      "t": 2.3817
+    },
+    {
+      "id": "b9q6cr3",
+      "type": "image",
+      "imageId": "img-0010",
+      "x": 0.4,
+      "y": 157.4,
+      "w": 40,
+      "anchor": "bncz09b",
+      "t": 1.1726
+    },
+    {
+      "id": "b8nfxgl",
+      "type": "paragraph",
+      "text": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n따라서 설치하고 실행되면 성공이시유! 성공한 마스터는 스스로 칭찬하시유.",
+      "markdown": false
+    },
+    {
+      "id": "bir8tnx",
+      "type": "paragraph",
+      "text": "---",
+      "markdown": true
+    },
+    {
+      "id": "b43se90",
+      "type": "heading",
+      "level": 3,
+      "text": "2. VS 설정"
+    },
+    {
+      "id": "bmlfzkd",
+      "type": "paragraph",
+      "text": "이대로 끝내면 멋있어 보이는 메모장일 뿐이시유. 설정도 해야 코딩하기 편하시유.",
+      "markdown": true
+    },
+    {
+      "id": "bdprc2z",
+      "type": "image",
+      "imageId": "img-0011",
+      "x": 0,
+      "y": 246.4,
+      "w": 52.5,
+      "anchor": "bmlfzkd",
+      "t": 1.1285
+    },
+    {
+      "id": "bwp4ash",
+      "type": "paragraph",
+      "text": "\n\n\n\n\n\n\nVS를 키고 왼쪽 위에 있는 네모난 것들을 누르시유.",
+      "markdown": false
+    },
+    {
+      "id": "bp8d0wj",
+      "type": "paragraph",
+      "text": "그다름 ```korean```이라 검색하면 ```Korean Language Pack for Visual Studio Code```라 적혀있고 microsoft에서 만든게 있을 것시유. 이걸 **확장** 이라 부르시유. 영어 잘하는 마스터도 있겠지만 못하는 마스터들을 위해 설치하시유.\n\n그다음 ```python```이라 검색하시유. microsoft에서 만든 확장이 나올 것시유. ```python, Python Debugger,Python Environments```전부 다운로드 받으시유. ```Pylance```는 안받는 거니까 영어 똑바로 읽으시유.",
+      "markdown": true
+    },
+    {
+      "id": "bcqndic",
+      "type": "paragraph",
+      "text": "\n\n이제 실제로 파일을 수정해 보겠시유. 전에 만든 first.py를 열어보시유.\n\n파일을 더블클릭하거나 VS에서\n파일>파일 열기>first.py선택(단축키: Ctrl+O)",
+      "markdown": false
+    },
+    {
+      "id": "badaybm",
+      "type": "image",
+      "imageId": "img-0012",
+      "x": 0.4,
+      "y": 324.8,
+      "w": 40.1,
+      "anchor": "bcqndic",
+      "t": 1.0656
+    },
+    {
+      "id": "b0a2g08",
+      "type": "paragraph",
+      "text": "\n\n\n\n\n\n이제 수정해보겠시유.",
+      "markdown": false
+    },
+    {
+      "id": "bg9lgea",
+      "type": "paragraph",
+      "text": "숙제로 한 것처럼 ```시유 사랑해```가 출력되게 해보시유.\n다 하면\nF5>python debugger>python파일\n로 실행할 수 있시유.",
+      "markdown": true
+    },
+    {
+      "id": "bd1ri68",
+      "type": "image",
+      "imageId": "img-0013",
+      "x": 0,
+      "y": 361.8,
+      "w": 46.1,
+      "anchor": "bg9lgea",
+      "t": 1.1868
+    },
+    {
+      "id": "btbetix",
+      "type": "paragraph",
+      "text": "\n\n\n\n\n\n\n성공한 마스터는 축하하시유!\n이번에는 숙제는 없시유. 대신 VS를 따라해서 설치해보시유.\n다했으니 가시유!",
+      "markdown": false
+    }
+  ]
+}

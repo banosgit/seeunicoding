@@ -122,32 +122,40 @@
       "type": "image",
       "imageId": "img-0002",
       "x": 0,
-      "y": 94.4,
-      "w": 57
+      "y": 95.9,
+      "w": 57,
+      "anchor": "bwb3ptb",
+      "t": 0.1731
     },
     {
       "id": "boctjfx",
       "type": "image",
       "imageId": "img-0003",
       "x": 0,
-      "y": 153.1,
-      "w": 32
+      "y": 154.6,
+      "w": 32,
+      "anchor": "bwb3ptb",
+      "t": 0.7041
     },
     {
       "id": "bwmgimg",
       "type": "image",
       "imageId": "img-0004",
-      "x": 43,
-      "y": 250.2,
-      "w": 52.3
+      "x": 42.8,
+      "y": 252,
+      "w": 52.3,
+      "anchor": "bgumxpj",
+      "t": 0.4635
     },
     {
       "id": "by3gtj5",
       "type": "image",
       "imageId": "img-0005",
       "x": 0,
-      "y": 362.5,
-      "w": 65.5
+      "y": 364.9,
+      "w": 65.5,
+      "anchor": "b7exv06",
+      "t": 0.5128
     }
   ]
 }

@@ -97,7 +97,8 @@ export default function App() {
       handle.current = h;
       confirmed.current = false;
       setErrors([]);
-      setStatus(`${h.name} 열기 완료`);
+      const legacy = data.blocks.some((b) => b.type === 'image' && !b.anchor);
+      setStatus(legacy ? `${h.name} 열기 완료 · 이미지 위치를 휴대폰에서도 맞도록 바꿨어요. 저장해 주세요.` : `${h.name} 열기 완료`);
     } catch (e) { if (e.name !== 'AbortError') setErrors([String(e)]); }
   }
 

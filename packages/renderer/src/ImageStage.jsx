@@ -6,7 +6,7 @@ const CORNERS = ['nw', 'ne', 'sw', 'se'];
 
 // 이미지 한 장. 강의 화면(article) 전체를 기준으로 x·y·너비(%)에 놓이고, 글 뒤(맨 아래 레이어)에 깔립니다.
 // edit 가 있으면(에디터 미리보기) 끌어서 이동, 모서리를 끌어서 크기 조절이 가능합니다.
-export function ImageBox({ block, edit, articleRef }) {
+export function ImageBox({ block, edit, articleRef, top }) {
   const boxRef = useRef(null);
   const drag = useRef(null);
   const lib = getImage(block.imageId);
@@ -54,7 +54,8 @@ export function ImageBox({ block, edit, articleRef }) {
   function onKey(e) {
     const m = measure();
     if (!m.box.h) return;
-    const patch = keyBox(m.size, m.box, block, e.key, e.shiftKey ? 5 : 1);
+    const cur = { x: block.x, y: (m.box.top / m.size.w) * 100, w: block.w }; // 실제 화면에서 잰 현재 위치
+    const patch = keyBox(m.size, m.box, cur, e.key, e.shiftKey ? 5 : 1);
     if (!patch) return;
     e.preventDefault();
     edit.onChange(block.id, patch);
@@ -76,7 +77,11 @@ export function ImageBox({ block, edit, articleRef }) {
     <div
       ref={boxRef}
       className={'lv-imgbox' + (selected ? ' is-selected' : '')}
-      style={{ left: `${block.x}%`, marginTop: `${block.y}%`, width: `${block.w}%` }}
+      style={{
+        left: `${block.x}%`,
+        width: `${block.w}%`,
+        ...(top != null ? { top: `${top}px`, marginTop: 0 } : { marginTop: `${block.y}%` }),
+      }}
       {...editProps}
     >
       {lib?.url ? (

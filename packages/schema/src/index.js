@@ -1,6 +1,7 @@
 export const FORMAT_VERSION = 1;
 export const BLOCK_TYPES = ['heading', 'paragraph', 'code', 'output', 'image'];
-// 이미지 블록: x·y·w 는 강의 화면 가로폭에 대한 % 값 (x=왼쪽, y=위쪽, w=너비). 글 뒤(맨 아래 레이어)에 놓입니다.
+// 이미지 블록: x·w 는 강의 화면 가로폭에 대한 % (x=왼쪽, w=너비). 세로 위치는 anchor(붙어 있는 글 블록 id)와 t(그 블록 높이 대비 위치 비율)로 기억하고,
+// y(가로폭 대비 %)는 anchor가 없을 때 쓰는 예비 값입니다. 이미지는 글 뒤(맨 아래 레이어)에 놓입니다.
 const ID_RE = /^[a-z]+-\d{4}$/;
 
 export function newBlock(type, extra = {}) {
@@ -40,6 +41,8 @@ export function validateLesson(data) {
       if (typeof b.imageId !== 'string' || !b.imageId) errors.push(`${at}: imageId가 비어 있습니다.`);
       for (const k of ['x', 'y', 'w']) if (typeof b[k] !== 'number' || !Number.isFinite(b[k])) errors.push(`${at}: ${k}는 숫자여야 합니다.`);
       if (typeof b.w === 'number' && (b.w < 1 || b.w > 100)) errors.push(`${at}: w는 1~100 사이여야 합니다.`);
+      if (b.anchor !== undefined && typeof b.anchor !== 'string') errors.push(`${at}: anchor는 글 블록 id(문자열)여야 합니다.`);
+      if (b.t !== undefined && (typeof b.t !== 'number' || !(b.t >= 0))) errors.push(`${at}: t는 0 이상의 숫자여야 합니다.`);
       return;
     }
     const field = b.type === 'code' ? 'code' : 'text';
