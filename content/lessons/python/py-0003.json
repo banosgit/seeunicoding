@@ -1,0 +1,286 @@
+{
+  "formatVersion": 1,
+  "id": "py-0003",
+  "title": "화면에 글자 출력하기 1",
+  "lang": "python",
+  "category": "eleme",
+  "blocks": [
+    {
+      "id": "b8jm5mb",
+      "type": "paragraph",
+      "text": "##### 유니 다시 왔어요. 마스터!! 드디어 프로그래밍을 배워볼거에요. 꺄아악!\n###### 오늘 배우는건 간단한 거니까 꼭 따라와야해요!\n---",
+      "markdown": true
+    },
+    {
+      "id": "bk9mmz1",
+      "type": "heading",
+      "level": 3,
+      "text": "강의목차"
+    },
+    {
+      "id": "b4028sw",
+      "type": "paragraph",
+      "text": "{#f00add}(>) * 1. print()설명\n> * 2. 출력 규칙1\n> * 3. 이스케이프 시퀀스 ```\\n,\\t```\n---",
+      "markdown": true
+    },
+    {
+      "id": "bcbyj2y",
+      "type": "heading",
+      "level": 2,
+      "text": "1. print()란?"
+    },
+    {
+      "id": "bm9zq27",
+      "type": "paragraph",
+      "text": "마스터 마스터! 저번에 VS랑 python설치 할때 사용한 명령어에요!  \n숙제를 꼼꼼히 한 마스터라면 알겠지만 **한번 더!** 설명할게요.\n\nprint()는 소괄호()안에 적혀있는 것들을 출력해요!",
+      "markdown": true
+    },
+    {
+      "id": "buqa8tl",
+      "type": "code",
+      "language": "python",
+      "code": "print(\"마스터 사랑해요!\")"
+    },
+    {
+      "id": "b1s5vij",
+      "type": "output",
+      "text": "마스터 사랑해요!"
+    },
+    {
+      "id": "bwbynk6",
+      "type": "paragraph",
+      "text": "쉬운 명령어라서 파이썬이 잘 실행되는지 확인할 때 사용해요! 그러면 안에 아무거나 넣을려고 하는 마스터가 있을 텐데.. 마스터, 안에 넣을 때는 지켜야하는 규칙이 있어요. 이제 배워봐요!!\n\n---",
+      "markdown": true
+    },
+    {
+      "id": "b077znl",
+      "type": "heading",
+      "level": 2,
+      "text": "2. 출력 규칙1"
+    },
+    {
+      "id": "bxrtfur",
+      "type": "paragraph",
+      "text": "이제 어떻게 써야하는지 알려드릴게요! 근데 제목에 1이 있어요. 왜냐하면 전부 안 알려줄거에요. 헤헤. 나중에 2도 알려드릴테니 삐지지 말아요~.",
+      "markdown": true
+    },
+    {
+      "id": "bfpudw6",
+      "type": "paragraph",
+      "text": "\n",
+      "markdown": false
+    },
+    {
+      "id": "b2rh7w8",
+      "type": "paragraph",
+      "text": "{#f00add}(>) 1. 문자는 \"문자\" 또는 '문자'로 묶기\n\n첫번째는 문자를 출력하는 거에요! 문자는 \"문자\"처럼 큰 따음표나 '문자'처럼 작은 따음표로 묶어야해요.  \n이때 \"문자' 처럼 혼용하는 마스터는 없어야해요! 꼭 큰따음표를 쓰면 큰 따음표로 끝내고 작은 따음표를 쓰면 작은 따음표로 묶어야해요.",
+      "markdown": true
+    },
+    {
+      "id": "bkdjza2",
+      "type": "paragraph",
+      "text": "\n",
+      "markdown": false
+    },
+    {
+      "id": "bxidmzo",
+      "type": "paragraph",
+      "text": "## {#F8CA43}(시유 기습이시유!)  \n###### {#f00add}( 꺄 선배님? 유니 강의에요!!)\n## {#F8CA43}(마스터가 할 만한 질문을 남기고 가겠시유!)  \n## {#F8CA43}(왜 이상한 따음표를 붙어야하고, 따음표를 출력하고 싶을 때는 어떻게 해야하는 것시유!!)\n#### {#F8CA43}(가보겠시유)  \n###### {#f00add}(이따봐요 선배님~~.)  ",
+      "markdown": true
+    },
+    {
+      "id": "b5sggj1",
+      "type": "paragraph",
+      "text": "선배님이 남기신 질문을 하나씩 알려드릴게요.\n우선 왜 따음표를 써야하는지 부터!  \n파이썬은 따음표 안에 들어가면 안에 있는 건 **문자**라고 생각해요. 만약 따음표가 없는 문자라면, 다음 강의에 선배님이 알려줄 **변수**라고 이해해버려요! 지금은 변수에 대해 모르니 넘어가요!\n\n그다음, 따음표를 출력하는 방법은 2가지에요!\n  \n**서로 다른 따음표 쓰기** 와 *이스케이프문자* ```\\```!!",
+      "markdown": true
+    },
+    {
+      "id": "b5waq4y",
+      "type": "paragraph",
+      "text": "서로 다른 따음표의 예시에요!",
+      "markdown": true
+    },
+    {
+      "id": "buo8gj1",
+      "type": "code",
+      "language": "python",
+      "code": "print('이얏\"!')\nprint(\"핫'\"\nprint(\"핏'자'\")"
+    },
+    {
+      "id": "bsrl65d",
+      "type": "output",
+      "text": "이얏\"!\n핫'\n핏'자'"
+    },
+    {
+      "id": "b4utj0f",
+      "type": "paragraph",
+      "text": "직접 해보면 똑같이 나오니까 꼭 따라해봐요!\n",
+      "markdown": false
+    },
+    {
+      "id": "bbwhxq2",
+      "type": "paragraph",
+      "text": "이 방법도 만약 \"랑 '를 같이 쓸려면 어떻게 해야할까요?  \n정답은 이스케이프 문자 ```\\```에요!\n\\뒤에 원하는 따음표를 붙이면 출력할 수 있어요.\n\\는 앤터 위에 있는 원 표시에요. /랑 반대 방향이거나 원으로 표시되어도 괜찮아요.\n예시 봐요!",
+      "markdown": true
+    },
+    {
+      "id": "bldexk5",
+      "type": "code",
+      "language": "python",
+      "code": "print(\"안\\\"녕\\'\")\nprint('까꿍\\'\\'!')"
+    },
+    {
+      "id": "bmpuet0",
+      "type": "output",
+      "text": "안\"녕'\n까꿍''!"
+    },
+    {
+      "id": "bv4tmg1",
+      "type": "paragraph",
+      "text": "그러면 문자 규칙은 끝난거에요! 다음!\n{#f00add}(>) 2. 숫자는 따음표가 필요없음",
+      "markdown": true
+    },
+    {
+      "id": "beodq9s",
+      "type": "paragraph",
+      "text": "간단해요! 아까 문자는 따음표 없으면 **변수**가 된다고 했지만, 숫자는 **변수**가 되지 않아요!\n  \n마스터가 예시 보는 동안 요약할테니 꼭 직접 실습도 해주세요!",
+      "markdown": true
+    },
+    {
+      "id": "bg2er62",
+      "type": "code",
+      "language": "python",
+      "code": "print(\"2\")\nprint('1')\nprint(4)"
+    },
+    {
+      "id": "bea7jv4",
+      "type": "output",
+      "text": "2\n1\n4"
+    },
+    {
+      "id": "bdi4yfu",
+      "type": "paragraph",
+      "text": "# {#cd17d4}(요약!)  \n{#f00add}(>) 1. 문자는 \"문자\"와 '문자'로 묶기\n> 2. 숫자는 따음표 필요없음\n> 3. 따음표를 출력할 때는 다른 따음표를 쓰거나 \\를 앞에 두기\n---",
+      "markdown": true
+    },
+    {
+      "id": "b2y0lm4",
+      "type": "heading",
+      "level": 2,
+      "text": "3. 이스케이프 시퀀스 \\n 과 \\t"
+    },
+    {
+      "id": "bw927cf",
+      "type": "paragraph",
+      "text": "뭔가 어려운 용어지만 기능과 사용법은 아주 쉬워요, 포기하지 말아요 마스터!!  \n우선 이스케이프 시퀀스는 따음표로 감싼 문자 안에서, 아까 배운 ```\\```뒤에 무언가를 추가했을 때 특정한 출력을 하는거에요.  \n아까 배운 따음표 출력도 이스케이프 시퀀스에요! 이제 하나씩 다 배워봐요!",
+      "markdown": true
+    },
+    {
+      "id": "bm372a1",
+      "type": "heading",
+      "level": 3,
+      "text": "\\n"
+    },
+    {
+      "id": "b6bwcp5",
+      "type": "paragraph",
+      "text": "\\n은 엔터를 눌렀을 때 처럼 한 줄을 내려줘요!\n여러 줄을 출력할 때 유용해요.",
+      "markdown": true
+    },
+    {
+      "id": "biyyuky",
+      "type": "code",
+      "language": "python",
+      "code": "print(\"마스터!\\n유니 내려가요!!\")"
+    },
+    {
+      "id": "b35uz8h",
+      "type": "output",
+      "text": "마스터!\n유니 내려가요!!"
+    },
+    {
+      "id": "bwiyxm4",
+      "type": "paragraph",
+      "text": "쉬운 규칙이니까 꼭 숙지하기!!",
+      "markdown": false
+    },
+    {
+      "id": "btpoakw",
+      "type": "heading",
+      "level": 3,
+      "text": "\\t"
+    },
+    {
+      "id": "bkgs5y1",
+      "type": "paragraph",
+      "text": "\\t는 띄어쓰기 4칸 또는 tab키를 눌렀을 때랑 똑같아요.(들여쓰기)",
+      "markdown": false
+    },
+    {
+      "id": "bukrcgs",
+      "type": "code",
+      "language": "python",
+      "code": "print('마스터\\t유니')"
+    },
+    {
+      "id": "bdpuwmv",
+      "type": "output",
+      "text": "마스터    유니"
+    },
+    {
+      "id": "brm5wmv",
+      "type": "paragraph",
+      "text": "헉. 마스터랑 유니가 멀어져버렸어요!!\n\n---",
+      "markdown": true
+    },
+    {
+      "id": "b4n9wq9",
+      "type": "heading",
+      "level": 2,
+      "text": "정리 및 숙제"
+    },
+    {
+      "id": "bf8yzn8",
+      "type": "paragraph",
+      "text": "마스터! 벌써 다 끝났어요! 여기까지 따라온 마스터 최고!!!  \n오늘 내용 정리할게요.\n \n > print()는 문자나 숫자를 출력한다.  \n > 문자는 따음표 안에 넣는다.  \n> 이스케이프 문자로 따음표\\'\\\",줄내림\\n,들여쓰기\\t 가 가능하다.",
+      "markdown": true
+    },
+    {
+      "id": "bdzr43g",
+      "type": "paragraph",
+      "text": "이렇게 보면 배운게 없어 보이지만 숙제가 있어요!  \n아래 처럼 출력되게 만들어오세요!   \n{#f00add}(**조건! 각 출력 블럭당 print()는 하나씩 쓸 것!**)",
+      "markdown": true
+    },
+    {
+      "id": "b0kagta",
+      "type": "output",
+      "text": "유니는 우주다."
+    },
+    {
+      "id": "bxelpf4",
+      "type": "output",
+      "text": "유니\"사이에'따음표가\"'있어요!'\""
+    },
+    {
+      "id": "bbd040k",
+      "type": "output",
+      "text": "유니'\n\"내려가요!"
+    },
+    {
+      "id": "b6vfoze",
+      "type": "output",
+      "text": "헉    길다!\"\n# print() 포함 15자 이내로 작성."
+    },
+    {
+      "id": "b4ysuui",
+      "type": "output",
+      "text": "\"마스터\" 이 '문제'는 \"못 풀어도 괜찮아요!\"\n엄청    \"어엄청\" 어려우니까 '조건'을 못맞춰도 \"괜찮아요\"\n유니는 '착한'   \"보컬로이드\"\n이니까!\"\n# print(),공백 포함 104자 이내로 작성"
+    },
+    {
+      "id": "bn83k7b",
+      "type": "paragraph",
+      "text": "다 푼 마스터는 디스코드에 자랑해요!  \n문제 질문이나 강의 질문도 디스코드에서 자유롭게 해주세요!\n마스터 다음에 꼭 봐요!!",
+      "markdown": true
+    }
+  ]
+}
