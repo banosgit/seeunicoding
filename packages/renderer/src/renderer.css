@@ -44,3 +44,14 @@
 .lv-handle--ne { right: -8px; top: -8px; cursor: nesw-resize; }
 .lv-handle--sw { left: -8px; bottom: -8px; cursor: nesw-resize; }
 .lv-miss { aspect-ratio: 4 / 3; display: grid; place-items: center; padding: 8px; text-align: center; font-size: .8rem; line-height: 1.4; color: #b3261e; background: #fdecea; border: 2px dashed #b3261e; }
+
+/* 접기/펼치기: 눌러야 안의 글이 보임 */
+.lv-toggle { margin: 0 0 14px; background: #fff; border: 1px solid #14213d; border-radius: 10px; }
+.lv-toggle > summary { display: flex; align-items: center; gap: 10px; padding: 10px 16px; font-weight: 700; cursor: pointer; list-style: none; }
+.lv-toggle > summary::-webkit-details-marker { display: none; }
+.lv-toggle > summary::before { content: "▸"; flex: none; transition: transform .15s; }
+.lv-toggle[open] > summary::before { transform: rotate(90deg); }
+.lv-toggle > summary:focus-visible { outline: 3px solid #2f5fcf; outline-offset: 2px; border-radius: 8px; }
+.lv-toggle .lv-toggle-body { margin: 0; padding: 12px 16px 14px; border-top: 1px solid #d9e0ec; }
+.lv--edit .lv-toggle > summary { pointer-events: auto; } /* 에디터 미리보기에서도 눌러서 열어볼 수 있게 */
+@media (prefers-reduced-motion: reduce) { .lv-toggle > summary::before { transition: none; } }

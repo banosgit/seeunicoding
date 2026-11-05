@@ -65,6 +65,16 @@ function Block({ block }) {
           <pre><code><Colored text={block.text} /></code></pre>
         </div>
       );
+    case 'toggle':
+      // 눌러야 안의 글이 보이는 상자 (힌트, 정답/해설 등). 브라우저 기본 details 라서 키보드로도 열 수 있어요.
+      return (
+        <details className="lv-toggle" data-bid={bid}>
+          <summary><Colored text={block.title} /></summary>
+          {block.markdown
+            ? <div className="lv-toggle-body lv-md"><Markdown text={block.text} /></div>
+            : <div className="lv-toggle-body lv-p"><Colored text={block.text} /></div>}
+        </details>
+      );
     default:
       return <p className="lv-err" data-bid={bid}>지원하지 않는 블록: {String(block.type)}</p>;
   }

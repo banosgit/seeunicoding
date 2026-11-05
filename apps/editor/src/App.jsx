@@ -4,7 +4,7 @@ import { BLOCK_TYPES, newBlock, newLesson, validateLesson } from '@seeuni/schema
 import ImagePicker from './ImagePicker.jsx';
 import config from '../../../content/categories.json';
 
-const LABEL = { heading: '제목', paragraph: '문단', code: '코드 예제', output: '예상 출력', image: '이미지' };
+const LABEL = { heading: '제목', paragraph: '문단', code: '코드 예제', output: '예상 출력', toggle: '접기/펼치기', image: '이미지' };
 const FILE_TYPES = [{ description: '강의 JSON', accept: { 'application/json': ['.json'] } }];
 const hasFS = 'showOpenFilePicker' in window;
 const byOrder = (a, b) => (a.order ?? 1e9) - (b.order ?? 1e9);
@@ -224,6 +224,21 @@ export default function App() {
               )}
               {b.type === 'output' && (
                 <textarea className="mono" rows={3} value={b.text} onChange={(e) => setBlock(i, { text: e.target.value })} placeholder="예상 출력" />
+              )}
+              {b.type === 'toggle' && (
+                <>
+                  <input value={b.title} onChange={(e) => setBlock(i, { title: e.target.value })} placeholder="누르는 곳에 보일 제목 (예: 힌트 보기)" />
+                  <div className="md-row">
+                    <button
+                      type="button"
+                      className="toggle"
+                      aria-pressed={!!b.markdown}
+                      onClick={() => setBlock(i, { markdown: !b.markdown })}
+                    >Markdown</button>
+                    <span className="hint">{b.markdown ? '마크다운으로 표시 중' : '일반 글로 표시 중'}</span>
+                  </div>
+                  <textarea rows={4} value={b.text} onChange={(e) => setBlock(i, { text: e.target.value })} placeholder="눌렀을 때 보일 내용" />
+                </>
               )}
               {b.type === 'image' && (
                 <div className="img-card">
