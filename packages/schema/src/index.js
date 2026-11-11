@@ -1,5 +1,5 @@
 export const FORMAT_VERSION = 1;
-export const BLOCK_TYPES = ['heading', 'paragraph', 'code', 'output', 'toggle', 'image', 'imageframe'];
+export const BLOCK_TYPES = ['heading', 'paragraph', 'code', 'output', 'toggle', 'sound', 'image', 'imageframe'];
 // 이미지 블럭(imageframe): 글 흐름 안에 자리를 차지하는 고정 비율 영역. x·y·w 는 그 영역에 대한 % 값이라 글이 위아래로 알아서 비켜가요.
 export const STAGE_RATIOS = ['16:9', '4:3', '1:1', '21:9', '3:1'];
 // 이미지 블록: x·w 는 강의 화면 가로폭에 대한 % (x=왼쪽, w=너비). 세로 위치는 anchor(붙어 있는 글 블록 id)와 t(그 블록 높이 대비 위치 비율)로 기억하고,
@@ -13,6 +13,7 @@ export function newBlock(type, extra = {}) {
     case 'paragraph': return { id, type, text: '', markdown: false };
     case 'code': return { id, type, language: 'python', code: '' };
     case 'output': return { id, type, text: '' };
+    case 'sound': return { id, type, soundId: '', label: '', ...extra };
     case 'imageframe': return { id, type, imageId: '', ratio: '16:9', x: 30, y: 10, w: 40, ...extra };
     case 'toggle': return { id, type, title: '', text: '', markdown: false, ...extra };
     case 'image': return { id, type, imageId: '', x: 30, y: 12, w: 40, ...extra };
@@ -41,6 +42,11 @@ export function validateLesson(data) {
     if (!b.id || seen.has(b.id)) errors.push(`${at}: id가 없거나 중복입니다.`);
     seen.add(b.id);
     if ((b.type === 'paragraph' || b.type === 'toggle') && b.markdown !== undefined && typeof b.markdown !== 'boolean') errors.push(`${at}: markdown 항목은 true/false여야 합니다.`);
+    if (b.type === 'sound') {
+      if (typeof b.soundId !== 'string' || !b.soundId) errors.push(`${at}: soundId가 비어 있습니다.`);
+      if (b.label !== undefined && typeof b.label !== 'string') errors.push(`${at}: label은 문자열이어야 합니다.`);
+      return;
+    }
     if (b.type === 'imageframe') {
       if (typeof b.imageId !== 'string' || !b.imageId) errors.push(`${at}: imageId가 비어 있습니다.`);
       if (!STAGE_RATIOS.includes(b.ratio)) errors.push(`${at}: ratio는 ${STAGE_RATIOS.join(', ')} 중 하나여야 합니다.`);

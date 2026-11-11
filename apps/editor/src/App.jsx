@@ -1,10 +1,11 @@
 import { useRef, useState } from 'react';
-import { LessonView, getImage } from '@seeuni/renderer';
+import { LessonView, getImage, getSound } from '@seeuni/renderer';
 import { BLOCK_TYPES, STAGE_RATIOS, newBlock, newLesson, validateLesson } from '@seeuni/schema';
 import ImagePicker from './ImagePicker.jsx';
+import SoundPicker from './SoundPicker.jsx';
 import config from '../../../content/categories.json';
 
-const LABEL = { heading: '제목', paragraph: '문단', code: '코드 예제', output: '예상 출력', toggle: '접기/펼치기', image: '배경 이미지', imageframe: '이미지 블럭' };
+const LABEL = { heading: '제목', paragraph: '문단', code: '코드 예제', output: '예상 출력', toggle: '접기/펼치기', sound: '소리', image: '배경 이미지', imageframe: '이미지 블럭' };
 const FILE_TYPES = [{ description: '강의 JSON', accept: { 'application/json': ['.json'] } }];
 const hasFS = 'showOpenFilePicker' in window;
 const byOrder = (a, b) => (a.order ?? 1e9) - (b.order ?? 1e9);
@@ -19,6 +20,7 @@ export default function App() {
   const [showIdTip, setShowIdTip] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [picker, setPicker] = useState(null);
+  const [soundPicker, setSoundPicker] = useState(null);
   const handle = useRef(null);
   const confirmed = useRef(false);
 
@@ -35,6 +37,10 @@ export default function App() {
     const nb = newBlock('image', { imageId });
     setLesson((l) => ({ ...l, blocks: [...l.blocks, nb] }));
     setSelectedId(nb.id);
+  };
+  const addSound = (soundId) => {
+    const nb = newBlock('sound', { soundId });
+    setLesson((l) => ({ ...l, blocks: [...l.blocks, nb] }));
   };
   const addImageFrame = (imageId) => {
     const nb = newBlock('imageframe', { imageId });
@@ -126,7 +132,9 @@ export default function App() {
     if (!hasFS) return alert('크롬 또는 엣지에서 실행해 주세요.');
     const imgErrs = lesson.blocks.flatMap((b, i) =>
       (b.type === 'image' || b.type === 'imageframe') && !getImage(b.imageId) ? [`블록 ${i + 1}: 이미지 라이브러리에 없는 이미지입니다. (${b.imageId})`] : []);
-    const errs = [...validateLesson(lesson), ...imgErrs];
+    const sndErrs = lesson.blocks.flatMap((b, i) =>
+      b.type === 'sound' && !getSound(b.soundId) ? [`블록 ${i + 1}: 소리 라이브러리에 없는 소리입니다. (${b.soundId})`] : []);
+    const errs = [...validateLesson(lesson), ...imgErrs, ...sndErrs];
     if (errs.length) { setErrors(errs); setStatus(''); return; }
     setErrors([]);
     try {
@@ -273,6 +281,16 @@ export default function App() {
                   <textarea rows={4} value={b.text} onChange={(e) => setBlock(i, { text: e.target.value })} placeholder="눌렀을 때 보일 내용" />
                 </>
               )}
+              {b.type === 'sound' && (
+                <>
+                  <input value={b.label ?? ''} onChange={(e) => setBlock(i, { label: e.target.value })} placeholder="재생 버튼 옆에 보일 글 (비우면 소리 제목이 나와요)" />
+                  <div className="row2">
+                    <span className="hint"><strong>{b.soundId}</strong> {getSound(b.soundId)?.title || getSound(b.soundId)?.file || '(라이브러리에 없음)'}</span>
+                    <button onClick={() => setSoundPicker({ onPick: (id) => patchBlock(b.id, { soundId: id }) })}>소리 바꾸기</button>
+                  </div>
+                  <p className="hint">오른쪽 미리보기의 ▶ 버튼을 눌러 들어볼 수 있어요. 강의에서도 이 버튼을 눌러야 재생돼요.</p>
+                </>
+              )}
               {b.type === 'imageframe' && (
                 <div className="img-card">
                   {getImage(b.imageId)?.url ? <img src={getImage(b.imageId).url} alt="" /> : <span className="noimg">없음</span>}
@@ -311,7 +329,8 @@ export default function App() {
               <button
                 key={t}
                 onClick={() => {
-                  if (t === 'image') setPicker({ onPick: addImage });
+                  if (t === 'sound') setSoundPicker({ onPick: addSound });
+                  else if (t === 'image') setPicker({ onPick: addImage });
                   else if (t === 'imageframe') setPicker({ onPick: addImageFrame });
                   else addBlock(t);
                 }}
@@ -324,6 +343,12 @@ export default function App() {
           <LessonView lesson={lesson} edit={edit} />
         </section>
       </div>
+      {soundPicker && (
+        <SoundPicker
+          onPick={(id) => { soundPicker.onPick(id); setSoundPicker(null); }}
+          onClose={() => setSoundPicker(null)}
+        />
+      )}
       {picker && (
         <ImagePicker
           onPick={(id) => { picker.onPick(id); setPicker(null); }}

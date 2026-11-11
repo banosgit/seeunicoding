@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { validateCategories, validateLesson } from '@seeuni/schema';
 
-export function checkLessons(dir, categoriesFile, imagesFile) {
+export function checkLessons(dir, categoriesFile, imagesFile, soundsFile) {
   const problems = [];
   const warnings = [];
 
@@ -45,6 +45,23 @@ export function checkLessons(dir, categoriesFile, imagesFile) {
     }
   }
 
+  // 소리 라이브러리 (content/sounds/sounds.json)
+  let soundFiles = null; // id -> file
+  const soundsDir = soundsFile ? path.dirname(soundsFile) : null;
+  if (soundsFile && fs.existsSync(soundsFile)) {
+    try {
+      const lib = JSON.parse(fs.readFileSync(soundsFile, 'utf8'));
+      soundFiles = new Map();
+      (Array.isArray(lib.sounds) ? lib.sounds : []).forEach((sn, i) => {
+        if (!sn?.id || !sn?.file) problems.push(`sounds.json: sounds[${i + 1}]: id와 file이 필요합니다.`);
+        else if (soundFiles.has(sn.id)) problems.push(`sounds.json: 소리 ID ${sn.id}가 중복입니다.`);
+        else soundFiles.set(sn.id, sn.file);
+      });
+    } catch (e) {
+      problems.push(`sounds.json: JSON 형식 오류 - ${e.message}`);
+    }
+  }
+
   if (!fs.existsSync(dir)) return { errors: problems, warnings };
   const ids = new Map();
   const files = fs.readdirSync(dir, { recursive: true }).map(String).filter((f) => f.endsWith('.json'));
@@ -65,6 +82,12 @@ export function checkLessons(dir, categoriesFile, imagesFile) {
     }
     if (!errs.length) {
       data.blocks.forEach((b, i) => {
+        if (b.type === 'sound') {
+          const sf = soundFiles?.get(b.soundId);
+          if (!sf) problems.push(`${name}: 블록 ${i + 1}: 소리 ID '${b.soundId}'가 content/sounds/sounds.json에 없습니다.`);
+          else if (!fs.existsSync(path.join(soundsDir, sf))) problems.push(`${name}: 블록 ${i + 1}: 소리 ${b.soundId}의 파일(${sf})이 content/sounds 폴더에 없습니다.`);
+          return;
+        }
         if (b.type !== 'image' && b.type !== 'imageframe') return;
         const file = imageFiles?.get(b.imageId);
         if (!file) problems.push(`${name}: 블록 ${i + 1}: 이미지 ID '${b.imageId}'가 content/images/images.json에 없습니다.`);

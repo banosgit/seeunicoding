@@ -4,10 +4,13 @@ import { parseColor, remarkMarks, toMarkdownSource } from './colorSyntax.js';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ImageBox } from './ImageStage.jsx';
 import { ImageFrame } from './ImageFrame.jsx';
+import { SoundPlayer } from './SoundPlayer.jsx';
+import { getSound } from './soundLibrary.js';
 import { anchorFor, readLayout, topFor } from './imageAnchor.js';
 import './renderer.css';
 
 export { getImage, imageList } from './imageLibrary.js';
+export { getSound, soundList } from './soundLibrary.js';
 
 function renderNodes(nodes) {
   return nodes.map((n, i) =>
@@ -65,6 +68,12 @@ function Block({ block, edit }) {
           <span>출력</span>
           <pre><code><Colored text={block.text} /></code></pre>
         </div>
+      );
+    case 'sound':
+      return (
+        <SoundPlayer block={block} bid={bid}>
+          <Colored text={block.label || getSound(block.soundId)?.title || '소리 듣기'} />
+        </SoundPlayer>
       );
     case 'imageframe':
       return <ImageFrame block={block} edit={edit} />;

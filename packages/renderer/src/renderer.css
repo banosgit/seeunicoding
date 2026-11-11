@@ -63,3 +63,11 @@
 .lv-framebox img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
 .lv--edit > .lv-frame { pointer-events: auto; }
 .lv--edit .lv-framebox { cursor: move; touch-action: none; }
+
+/* 소리: 재생 버튼 */
+.lv-sound { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; padding: 10px 14px; background: #fff; border: 1px solid #14213d; border-radius: 10px; }
+.lv-play { flex: none; width: 38px; height: 38px; padding: 0; border: 2px solid #14213d; border-radius: 50%; background: #ffc540; color: #14213d; font-size: .95rem; line-height: 1; cursor: pointer; }
+.lv-play[aria-pressed="true"] { background: #2f5fcf; border-color: #2f5fcf; color: #fff; }
+.lv-play:disabled { opacity: .5; cursor: not-allowed; }
+.lv-play:focus-visible { outline: 3px solid #2f5fcf; outline-offset: 2px; }
+.lv--edit .lv-sound .lv-play { pointer-events: auto; } /* 에디터 미리보기에서도 눌러서 들어볼 수 있게 */
