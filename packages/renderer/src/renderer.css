@@ -55,3 +55,11 @@
 .lv-toggle .lv-toggle-body { margin: 0; padding: 12px 16px 14px; border-top: 1px solid #d9e0ec; }
 .lv--edit .lv-toggle > summary { pointer-events: auto; } /* 에디터 미리보기에서도 눌러서 열어볼 수 있게 */
 @media (prefers-reduced-motion: reduce) { .lv-toggle > summary::before { transition: none; } }
+
+/* 이미지 블럭(영역형): 글 흐름 안에서 자리를 차지해서 글이 위아래로 비켜감 */
+.lv-frame { position: relative; width: 100%; margin: 0 0 14px; }
+.lv-frame--edit { outline: 1px dashed #9aa5bb; background: rgba(47, 95, 207, .04); }
+.lv-framebox { position: absolute; line-height: 0; }
+.lv-framebox img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
+.lv--edit > .lv-frame { pointer-events: auto; }
+.lv--edit .lv-framebox { cursor: move; touch-action: none; }

@@ -3,6 +3,7 @@ import remarkGfm from 'remark-gfm';
 import { parseColor, remarkMarks, toMarkdownSource } from './colorSyntax.js';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ImageBox } from './ImageStage.jsx';
+import { ImageFrame } from './ImageFrame.jsx';
 import { anchorFor, readLayout, topFor } from './imageAnchor.js';
 import './renderer.css';
 
@@ -38,7 +39,7 @@ function Markdown({ text }) {
   );
 }
 
-function Block({ block }) {
+function Block({ block, edit }) {
   const bid = block.id; // 이미지가 글에 붙을 때 기준으로 쓰는 표시
   switch (block.type) {
     case 'heading': {
@@ -65,6 +66,8 @@ function Block({ block }) {
           <pre><code><Colored text={block.text} /></code></pre>
         </div>
       );
+    case 'imageframe':
+      return <ImageFrame block={block} edit={edit} />;
     case 'toggle':
       // 눌러야 안의 글이 보이는 상자 (힌트, 정답/해설 등). 브라우저 기본 details 라서 키보드로도 열 수 있어요.
       return (
@@ -188,7 +191,7 @@ export function LessonView({ lesson, edit }) {
         ))}
       </div>
       <h1 className="lv-title" data-bid="__title">{lesson.title ? <Colored text={lesson.title} /> : '(제목 없음)'}</h1>
-      {rest.map((b) => <Block key={b.id} block={b} />)}
+      {rest.map((b) => <Block key={b.id} block={b} edit={edit} />)}
     </article>
   );
 }

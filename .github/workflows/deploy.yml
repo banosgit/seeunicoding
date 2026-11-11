@@ -26,6 +26,9 @@ jobs:
         run: rm -rf node_modules apps/site/node_modules
       - run: npm install
       - run: npm run build
+      - run: npm run build -w editor
+      - name: Put the editor under /editor/
+        run: cp -r apps/editor/dist apps/site/dist/editor
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/site/dist

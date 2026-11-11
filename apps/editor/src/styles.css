@@ -66,3 +66,6 @@ button:disabled { opacity: .45; cursor: not-allowed; border-color: #b9c3d8; }
   .cols { grid-template-columns: minmax(380px, 1fr) 800px; }
   .preview { position: sticky; top: 76px; max-height: calc(100vh - 96px); }
 }
+
+/* 블럭 번호로 이동 */
+.block-head .idx { width: 60px; padding: 4px 6px; text-align: center; }

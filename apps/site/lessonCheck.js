@@ -65,7 +65,7 @@ export function checkLessons(dir, categoriesFile, imagesFile) {
     }
     if (!errs.length) {
       data.blocks.forEach((b, i) => {
-        if (b.type !== 'image') return;
+        if (b.type !== 'image' && b.type !== 'imageframe') return;
         const file = imageFiles?.get(b.imageId);
         if (!file) problems.push(`${name}: 블록 ${i + 1}: 이미지 ID '${b.imageId}'가 content/images/images.json에 없습니다.`);
         else if (!fs.existsSync(path.join(imagesDir, file))) problems.push(`${name}: 블록 ${i + 1}: 이미지 ${b.imageId}의 파일(${file})이 content/images 폴더에 없습니다.`);

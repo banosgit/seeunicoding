@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
 import { LessonView, getImage } from '@seeuni/renderer';
-import { BLOCK_TYPES, newBlock, newLesson, validateLesson } from '@seeuni/schema';
+import { BLOCK_TYPES, STAGE_RATIOS, newBlock, newLesson, validateLesson } from '@seeuni/schema';
 import ImagePicker from './ImagePicker.jsx';
 import config from '../../../content/categories.json';
 
-const LABEL = { heading: '제목', paragraph: '문단', code: '코드 예제', output: '예상 출력', toggle: '접기/펼치기', image: '이미지' };
+const LABEL = { heading: '제목', paragraph: '문단', code: '코드 예제', output: '예상 출력', toggle: '접기/펼치기', image: '배경 이미지', imageframe: '이미지 블럭' };
 const FILE_TYPES = [{ description: '강의 JSON', accept: { 'application/json': ['.json'] } }];
 const hasFS = 'showOpenFilePicker' in window;
 const byOrder = (a, b) => (a.order ?? 1e9) - (b.order ?? 1e9);
@@ -35,6 +35,26 @@ export default function App() {
     const nb = newBlock('image', { imageId });
     setLesson((l) => ({ ...l, blocks: [...l.blocks, nb] }));
     setSelectedId(nb.id);
+  };
+  const addImageFrame = (imageId) => {
+    const nb = newBlock('imageframe', { imageId });
+    setLesson((l) => ({ ...l, blocks: [...l.blocks, nb] }));
+    setSelectedId(nb.id);
+  };
+  // 번호를 입력해서 블럭을 그 위치로 바로 옮깁니다.
+  const moveTo = (i, value) => {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return;
+    const target = Math.min(Math.max(Math.round(n), 1), lesson.blocks.length) - 1;
+    if (target === i) return;
+    const id = lesson.blocks[i].id;
+    setLesson((l) => {
+      const a = [...l.blocks];
+      const [b] = a.splice(i, 1);
+      a.splice(target, 0, b);
+      return { ...l, blocks: a };
+    });
+    setTimeout(() => document.getElementById(`blk-${id}`)?.scrollIntoView({ block: 'nearest' }), 60);
   };
   const edit = { selectedId, onSelect: setSelectedId, onChange: patchBlock };
   const setBlock = (i, patch) =>
@@ -105,7 +125,7 @@ export default function App() {
   async function save(saveAs) {
     if (!hasFS) return alert('크롬 또는 엣지에서 실행해 주세요.');
     const imgErrs = lesson.blocks.flatMap((b, i) =>
-      b.type === 'image' && !getImage(b.imageId) ? [`블록 ${i + 1}: 이미지 라이브러리에 없는 이미지입니다. (${b.imageId})`] : []);
+      (b.type === 'image' || b.type === 'imageframe') && !getImage(b.imageId) ? [`블록 ${i + 1}: 이미지 라이브러리에 없는 이미지입니다. (${b.imageId})`] : []);
     const errs = [...validateLesson(lesson), ...imgErrs];
     if (errs.length) { setErrors(errs); setStatus(''); return; }
     setErrors([]);
@@ -183,10 +203,23 @@ export default function App() {
           </div>
 
           {lesson.blocks.map((b, i) => (
-            <div className={'block' + (selectedId === b.id ? ' sel' : '')} key={b.id} onClick={() => setSelectedId(b.type === 'image' ? b.id : null)}>
+            <div id={`blk-${b.id}`} className={'block' + (selectedId === b.id ? ' sel' : '')} key={b.id} onClick={() => setSelectedId(b.type === 'image' || b.type === 'imageframe' ? b.id : null)}>
               <div className="block-head">
                 <strong>{i + 1}. {LABEL[b.type]}</strong>
                 <span>
+                  <input
+                    className="idx"
+                    type="number"
+                    min={1}
+                    max={lesson.blocks.length}
+                    defaultValue={i + 1}
+                    key={`${b.id}-${i}`}
+                    aria-label={`${i + 1}번 블럭을 옮길 번호`}
+                    title="옮길 번호를 입력하고 Enter를 누르세요"
+                    onClick={(e) => e.stopPropagation()}
+                    onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); moveTo(i, e.currentTarget.value); } }}
+                    onBlur={(e) => moveTo(i, e.currentTarget.value)}
+                  />
                   <button onClick={() => move(i, -1)} aria-label="위로">↑</button>
                   <button onClick={() => move(i, 1)} aria-label="아래로">↓</button>
                   <button onClick={() => dupBlock(i)}>복제</button>
@@ -240,6 +273,23 @@ export default function App() {
                   <textarea rows={4} value={b.text} onChange={(e) => setBlock(i, { text: e.target.value })} placeholder="눌렀을 때 보일 내용" />
                 </>
               )}
+              {b.type === 'imageframe' && (
+                <div className="img-card">
+                  {getImage(b.imageId)?.url ? <img src={getImage(b.imageId).url} alt="" /> : <span className="noimg">없음</span>}
+                  <div className="img-info">
+                    <div><strong>{b.imageId}</strong> <span className="hint">{getImage(b.imageId)?.alt}</span></div>
+                    <div className="row2">
+                      <label>영역 비율
+                        <select value={b.ratio} onChange={(e) => setBlock(i, { ratio: e.target.value })}>
+                          {STAGE_RATIOS.map((r) => <option key={r} value={r}>{r}</option>)}
+                        </select>
+                      </label>
+                      <button onClick={() => setPicker({ onPick: (id) => patchBlock(b.id, { imageId: id }) })}>이미지 바꾸기</button>
+                    </div>
+                    <p className="hint">글 사이에 자리를 차지하는 영역이에요. 앞뒤 글이 위아래로 알아서 비켜가고, 이미지는 이 영역 안에서 끌어 이동하거나 모서리를 끌어 크기를 조절해요.</p>
+                  </div>
+                </div>
+              )}
               {b.type === 'image' && (
                 <div className="img-card">
                   {getImage(b.imageId)?.url ? <img src={getImage(b.imageId).url} alt="" /> : <span className="noimg">없음</span>}
@@ -258,7 +308,14 @@ export default function App() {
           <div className="add">
             <span>블록 추가</span>
             {BLOCK_TYPES.map((t) => (
-              <button key={t} onClick={() => (t === 'image' ? setPicker({ onPick: addImage }) : addBlock(t))}>+ {LABEL[t]}</button>
+              <button
+                key={t}
+                onClick={() => {
+                  if (t === 'image') setPicker({ onPick: addImage });
+                  else if (t === 'imageframe') setPicker({ onPick: addImageFrame });
+                  else addBlock(t);
+                }}
+              >+ {LABEL[t]}</button>
             ))}
           </div>
         </section>

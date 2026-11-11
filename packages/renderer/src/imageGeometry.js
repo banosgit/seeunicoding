@@ -49,3 +49,40 @@ export function keyBox(s, box, cur, key, step) {
   const yMax = Math.max(0, ((s.h - Math.min(hPx, MIN_VISIBLE)) / s.w) * 100);
   return { x: r1(clamp(x, 0, 100 - w)), y: r1(clamp(y, 0, yMax)), w: r1(w) };
 }
+
+// ── 이미지 블럭(영역형): 이미지가 영역 밖으로 나가지 않아요. x·y·w 모두 "영역"에 대한 % (y는 영역 높이 기준)
+export function stageMove(s, box, dx, dy) {
+  const left = clamp(box.left + dx, 0, Math.max(0, s.w - box.w));
+  const top = clamp(box.top + dy, 0, Math.max(0, s.h - box.h));
+  return { x: r1((left / s.w) * 100), y: r1((top / s.h) * 100) };
+}
+
+export function stageResize(s, box, corner, px) {
+  const [ax, ay] = anchorOf(box, corner);
+  const A = box.w / box.h;
+  const east = corner.endsWith('e');
+  const south = corner.startsWith('s');
+  const maxW = Math.min(east ? s.w - ax : ax, (south ? s.h - ay : ay) * A);
+  const w = clamp(Math.abs(px - ax), Math.min(s.w * 0.05, maxW), maxW);
+  const h = w / A;
+  return {
+    x: r1(((east ? ax : ax - w) / s.w) * 100),
+    y: r1(((south ? ay : ay - h) / s.h) * 100),
+    w: r1((w / s.w) * 100),
+  };
+}
+
+export function stageKey(s, box, cur, key, step) {
+  let { x, y, w } = cur;
+  if (key === 'ArrowLeft') x -= step;
+  else if (key === 'ArrowRight') x += step;
+  else if (key === 'ArrowUp') y -= step;
+  else if (key === 'ArrowDown') y += step;
+  else if (key === '+' || key === '=') w += step;
+  else if (key === '-') w -= step;
+  else return null;
+  const wMax = Math.min(100, (100 * s.h * box.w) / (box.h * s.w));
+  w = clamp(w, Math.min(5, wMax), wMax);
+  const hPct = (((box.h / box.w) * (w / 100) * s.w) / s.h) * 100;
+  return { x: r1(clamp(x, 0, 100 - w)), y: r1(clamp(y, 0, Math.max(0, 100 - hPct))), w: r1(w) };
+}

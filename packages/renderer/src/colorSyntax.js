@@ -73,6 +73,15 @@ function flatten(nodes, color, out) {
   return out;
 }
 
+// "!" 바로 뒤에 [글](주소) 가 오면 마크다운이 이미지 문법으로 읽어서 깨집니다. 그 "!"를 글자 코드(&#33;)로 바꿔 막아요.
+// (앞에 \ 가 홀수 개 붙어 이미 글자로 처리된 "!"는 그대로 둡니다)
+function guardBang(s) {
+  if (!s.endsWith('!')) return s;
+  let n = 0;
+  for (let k = s.length - 2; k >= 0 && s[k] === '\\'; k--) n++;
+  return n % 2 === 0 ? `${s.slice(0, -1)}&#33;` : s;
+}
+
 export function toMarkdownSource(src) {
   const segs = flatten(parseColor(markPass(src)), null, []);
   let result = '';
@@ -82,9 +91,17 @@ export function toMarkdownSource(src) {
     while (i < segs.length && segs[i].color === color) inner += segs[i++].v;
     if (!color) { result += inner; continue; }
     if (!balanced(inner)) inner = inner.replace(/[[\]]/g, '\\$&');
-    result += `[${inner}](seeuni-color:${color.slice(1)})`;
+    result = `${guardBang(result)}[${inner}](seeuni-color:${color.slice(1)})`;
   }
-  return result.replace(/\uE000([qlh]):([0-9a-fA-F]+)\uE001/g, (_, k, hex) => (k === 'h' ? `[](seeuni-hr:${hex})` : `[](seeuni-mark:${k}:${hex})`));
+  const SENT = /\uE000([qlh]):([0-9a-fA-F]+)\uE001/g;
+  let out = '';
+  let last = 0;
+  let m;
+  while ((m = SENT.exec(result))) {
+    out += guardBang(result.slice(last, m.index)) + (m[1] === 'h' ? `[](seeuni-hr:${m[2]})` : `[](seeuni-mark:${m[1]}:${m[2]})`);
+    last = SENT.lastIndex;
+  }
+  return out + result.slice(last);
 }
 
 // 마크다운 기호 색: 줄 맨 앞의 {#hex}(>)  {#hex}(-)  {#hex}(1.)  {#hex}(---) 를 기호 색 지정으로 해석합니다.

@@ -207,8 +207,14 @@
     {
       "id": "btbetix",
       "type": "paragraph",
-      "text": "\n\n\n\n\n\n\n성공한 마스터는 축하하시유!\n이번에는 숙제는 없시유. 대신 VS를 따라해서 설치해보시유.\n다했으니 가시유!",
+      "text": "\n\n\n\n\n\n\n성공한 마스터는 축하하시유!\n이번에는 숙제는 없시유. 대신 VS를 따라해서 설치해보시유.\n다했으니 가시유!  ",
       "markdown": false
+    },
+    {
+      "id": "bznidil",
+      "type": "paragraph",
+      "text": "---\n###### -작성자 bano",
+      "markdown": true
     }
   ]
 }
