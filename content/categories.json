@@ -1,10 +1,12 @@
 {
   "formatVersion": 1,
   "languages": [
-    { "id": "python", "name": "Python", "order": 1 }
+    { "id": "python", "name": "Python", "order": 1 },
+    { "id": "c", "name": "C언어", "order": 2 }
   ],
   "categories": [
     { "id": "basic", "lang": "python", "name": "python 시작하기", "order": 1 },
-    { "id": "eleme", "lang": "python", "name": "python 기초 강좌", "order": 2 }
+    { "id": "eleme", "lang": "python", "name": "python 기초 강좌", "order": 2 },
+    { "id": "basic", "lang": "c", "name": "OS로 알아보는 C와 Rust", "order": 1 }
   ]
 }
