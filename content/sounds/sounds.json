@@ -1,1 +1,12 @@
-{ "formatVersion": 1, "sounds": [] }
+{
+  "formatVersion": 1,
+  "sounds": [
+    {
+      "id": "snd-0001",
+      "file": "burn.mp3",
+      "title": "",
+      "tags": [],
+      "source": ""
+    }
+  ]
+}

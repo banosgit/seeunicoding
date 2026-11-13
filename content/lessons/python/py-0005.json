@@ -1,0 +1,406 @@
+{
+  "formatVersion": 1,
+  "id": "py-0005",
+  "title": "화면에 글자 출력하기2",
+  "lang": "python",
+  "category": "eleme",
+  "blocks": [
+    {
+      "id": "b6m661d",
+      "type": "paragraph",
+      "text": "##### 반갑시유! 이번에 시유 한정판 판매 기념으로 연속 출연이시유! 오늘은 출력하기1,변수1 강의를 미리 듣고 와야하시유.\n###### 숙제도 한번에 체점할 거시유!!\n---",
+      "markdown": true
+    },
+    {
+      "id": "b8gnpw6",
+      "type": "heading",
+      "level": 3,
+      "text": "강의 목차"
+    },
+    {
+      "id": "bllwaii",
+      "type": "paragraph",
+      "text": "{#FEBF3B}(>) * 1. 여러가지 값 출력하기\n{#FEBF3B}(>) * 2. print()매개변수 sep,end\n{#FEBF3B}(>) * 3. 문자열에 변수 넣기\n---",
+      "markdown": true
+    },
+    {
+      "id": "b3xr5m2",
+      "type": "heading",
+      "level": 3,
+      "text": "숙제 검사(분량상 어려운 문제만 해답이 있시유. 다른 문제는 디스코드에 물어보시유.)"
+    },
+    {
+      "id": "bqutp27",
+      "type": "toggle",
+      "title": "화면에 글자 출력하기1 숙제 정답",
+      "text": "1. print(\"유니는 우주다.\")\n2. print(\"유니\\\"사이에'따음표가\\\"'있어요!'\")\n3. print(\"유니'\\n\\\"내려가요!\")\n4. print('헉\\t길다!\"')\n5. print('\"마스터\" 이 \\'문제\\'는 \"못 풀어도 괜찮아요!\"\\n엄청\\t\"어엄청\" 어려우니까 \\'조건\\'을 못맞춰도 \"괜찮아요\"\\n유니는 \\'착한\\'\\t\"보컬로이드\"\\n이니까!\"')",
+      "markdown": false
+    },
+    {
+      "id": "b1o9uuf",
+      "type": "toggle",
+      "title": "화면에 글자 출력하기1 숙제 해설(4,5)",
+      "text": "4. 우선 헉    길다를 출력할려면\n```\nprint(\"헉    길다\")\n```\n이지만 16글자이시유. 따라서 배운 이스케이프 문자 \\t를 써서 띄어쓰기 4칸->\\t(2칸)으로 줄일 수 있시유.  \n```\nprint(\"헉\\t길다\")\n```\n그다음 마지막에 \"를 출력하기 위해 이스케이프 문자를 쓰면\n```\nprint(\"헉\\t길다\\\"\")\n```\n기껏 줄였더니 다시 늘어나버렸시유. 여기서 파이썬의 특징! 서로 다른 따음표는 이스케이프가 필요 없는 것을 이용해야하시유. 따라서 정답은 이렇게 되시유.\n```\nprint('헉\\t길다'\")\n```\n5. 제일 어려운 문제일것시유. 우선 해당 문제는 정답이 하나밖에 없시유.\n```\nprint('\"마스터\" 이 \\'문제\\'는 \"못 풀어도 괜찮아요!\"\\n엄청\\t\"어엄청\" 어려우니까 \\'조건\\'을 못맞춰도 \"괜찮아요\"\\n유니는 \\'착한\\'\\t\"보컬로이드\"\\n이니까!\"')\n```  \n푸는 순서  \n1. 작은 따음표와 큰 따음표의 개수를 세기  \n2. 많은 따음표의 개수와 다른 따음표로 전체 묶기(이스케이프 문자를 덜 쓰기 위해서이시유.)  \n3. 띄어쓰기 4칸은 \\t로 대체하기  \n이해가 안된다면 디코에 질문 하시유!",
+      "markdown": true
+    },
+    {
+      "id": "bwyt2w8",
+      "type": "toggle",
+      "title": "파이썬 변수1 정답",
+      "text": "name=\"시유\"  \nage=17  \nsecret=44.5  \n    \nprint(type(name))  \nprint(type(age))  \nprint(type(secret))\n",
+      "markdown": true
+    },
+    {
+      "id": "b2hoez3",
+      "type": "paragraph",
+      "text": "---",
+      "markdown": true
+    },
+    {
+      "id": "bm6x6gl",
+      "type": "heading",
+      "level": 2,
+      "text": "1. 여러가지 값 출력하기"
+    },
+    {
+      "id": "buiausj",
+      "type": "paragraph",
+      "text": "저번에는 하나의 문자, 하나의 변수, 하나의 변수 종류만 출력했시유. 이번에는 한번에 출력하겠시유.  \n우선\n```\nname = \"시유\"\n```\n가 이미 저장되어 있다고 하겠시유.  \n출력해야하는건",
+      "markdown": true
+    },
+    {
+      "id": "b0i92kv",
+      "type": "output",
+      "text": "시유 = fantasy  \n#단, 한글 문자열 사용 금지."
+    },
+    {
+      "id": "bakqg6d",
+      "type": "paragraph",
+      "text": "이시유. 하지만 조건에 한글 문자열을 못 쓴다고 적혀있시유!!!  \n조건을 지킬려면 name변수를 써야하니까..",
+      "markdown": false
+    },
+    {
+      "id": "bs3ppcp",
+      "type": "code",
+      "language": "python",
+      "code": "print(name)  \nprint(\"= fantasy\")"
+    },
+    {
+      "id": "bthck3v",
+      "type": "paragraph",
+      "text": "를 생각하는 마스터가 있겠지만 **틀렸시유!**  \n실제로 실행하면,",
+      "markdown": true
+    },
+    {
+      "id": "bjrxpuj",
+      "type": "output",
+      "text": "시유\n= fantasy"
+    },
+    {
+      "id": "bb0dcqq",
+      "type": "paragraph",
+      "text": "가 되어버리시유. 이때 여러 개를 출력하는 방법을 배우겠시유.  바로바로 ```,```와 ```+``` 이시유.  \n하나씩 설명하겠시유.  \n### ```,```구분  \n출력해야 하는 것들 사이에 ```,```를 붙여서 나눌 수 있시유. 문제에 적용하면 이렇게 되시유.",
+      "markdown": true
+    },
+    {
+      "id": "brwgznw",
+      "type": "code",
+      "language": "python",
+      "code": "print(name,\"= fantasy\")"
+    },
+    {
+      "id": "bmknidd",
+      "type": "paragraph",
+      "text": "하지만 직접 해보면 차이가 있시유.(에러가 뜬다면 name변수를 저장 안 했을 거시유.)  \n시유도 출력해보겠시유!",
+      "markdown": true
+    },
+    {
+      "id": "buqrghz",
+      "type": "output",
+      "text": "시유 = fantasy"
+    },
+    {
+      "id": "bknndw9",
+      "type": "paragraph",
+      "text": "시유와 = 사이에 띄어쓰기가 들어가 있시유.  \n바로 ```,```의 특징이시유. ```,```로 구분하면 ```,```가 있는 곳에 띄어쓰기 1칸이 자동으로 생기시유.  \n이걸 해결하기 위해서는 ```+```를 사용하면 되시유.",
+      "markdown": true
+    },
+    {
+      "id": "b9sss7y",
+      "type": "paragraph",
+      "text": "### ``+``구분",
+      "markdown": true
+    },
+    {
+      "id": "b8hvrc3",
+      "type": "paragraph",
+      "text": "```+```도 ```,```랑 쓰는 거는 차이가 없시유. 똑같이 사이에 넣으면 되시유. 직접 해보시유.",
+      "markdown": true
+    },
+    {
+      "id": "bvk3ivp",
+      "type": "code",
+      "language": "python",
+      "code": "print(name+\"= fantasy\")"
+    },
+    {
+      "id": "bsjhz4e",
+      "type": "output",
+      "text": "시유= fantasy"
+    },
+    {
+      "id": "b92s1wr",
+      "type": "paragraph",
+      "text": "드디어 문제를 풀었시유!  하지만 ```+```도 문제가 있시유 후후.  \n\n---",
+      "markdown": true
+    },
+    {
+      "id": "bh7fyvr",
+      "type": "heading",
+      "level": 2,
+      "text": "2. print()매개변수 sep,end"
+    },
+    {
+      "id": "b2fr9bf",
+      "type": "code",
+      "language": "python",
+      "code": "name=\"시유\"\nage=17"
+    },
+    {
+      "id": "b2xz3ht",
+      "type": "paragraph",
+      "text": "이번에도 위 코드가 적혀있다는 가정하에 진행하겠시유. 바로 문제 보시유!",
+      "markdown": false
+    },
+    {
+      "id": "bkbrqcq",
+      "type": "output",
+      "text": "시유17\n#단, name과 age 변수만 사용할 것."
+    },
+    {
+      "id": "bz6yn4b",
+      "type": "paragraph",
+      "text": "아까 배운 내용을 그대로 적용해보겠시유.  \n띄어쓰기가 없으니까 name과 age변수는 ```+```로 나누면 되시유.",
+      "markdown": true
+    },
+    {
+      "id": "bqkfflq",
+      "type": "code",
+      "language": "python",
+      "code": "print(name+age)"
+    },
+    {
+      "id": "bgpcw2k",
+      "type": "output",
+      "text": "  File \"C:\\Users\\seeu\\seeuseeu\\seeu.py\", line 5, in <module>\n    print(name+age)\n          ~~~~^~~~\nTypeError: can only concatenate str (not \"int\") to str"
+    },
+    {
+      "id": "b11uifp",
+      "type": "paragraph",
+      "text": "이런 오류가 났시유. 코드가 오류가 났을 때는 오류 메세지를 읽고 고쳐야하시유. 이걸 ```디버깅```이라 하시유.  \n시유와 같이 읽어보시유.  \nㅤ  \n우선 위에 **File~~** 하는 부분은 어디에 있는 파일이 오류가 났는지 알려주는 거시유. 해당 파일에서 line 5라고 했으니, 5번줄에 오류가 있다는 거시유. ```<module>```은 지금은 설명하지 않겠시유.  \n그다음, line 5에서도 name과 age사이에 ```+```를 오류로 가르키고 있시유.  \n아래 오류 메세지를 읽으면 ```+```로 연결할 때 string형은 string형으로만 ```+```로  연결해야 한다는 뜻이시유.   \nㅤ  \n즉, **string형**변수와 **int**형 변수는 +로 연결할 수 없시유.  \nage변수를 string형으로 바꾸는 것도 방법이지만 더 쉬운 방법이 있시유.  \n바로 매개변수```sep```을 이용하는 것이시유.  \n  \n사용법은 쉽시유.",
+      "markdown": true
+    },
+    {
+      "id": "bbfjus6",
+      "type": "code",
+      "language": "python",
+      "code": "print(값1,값2,값3,...,값n,sep=',자리에 대체할 텍스트')"
+    },
+    {
+      "id": "b76u4b5",
+      "type": "paragraph",
+      "text": "만약 sep='1'을 적는다면 띄어쓰기로 출력되는 곳에 1이 뜨는 것이시유. 예시 보시유.",
+      "markdown": true
+    },
+    {
+      "id": "bz54odo",
+      "type": "code",
+      "language": "python",
+      "code": "print(name,\"야옹\",sep='울자')\n#name=\"시유\"라고 아까 정의했시유."
+    },
+    {
+      "id": "bkfl5v5",
+      "type": "output",
+      "text": "시유울자야옹"
+    },
+    {
+      "id": "b3r652t",
+      "type": "paragraph",
+      "text": "그렇다면  \nsep=''  \n로 안에 값을 비우면 되겠시유.",
+      "markdown": false
+    },
+    {
+      "id": "b2afred",
+      "type": "code",
+      "language": "python",
+      "code": "print(name,age,sep='')"
+    },
+    {
+      "id": "bp7wwbk",
+      "type": "output",
+      "text": "시유17"
+    },
+    {
+      "id": "bptbvg6",
+      "type": "paragraph",
+      "text": "성공이시유.  \n  \n매개변수는 sep 처럼 특정한 값을 명령어에 전달하시유. sep을 배웠으니 다른 매개변수 end도 배워보겠시유.  \nend는 단어 그대로 마지막에 값을 넣시유. 사용법은 같시유.",
+      "markdown": true
+    },
+    {
+      "id": "b53lmws",
+      "type": "code",
+      "language": "python",
+      "code": "print(값1,값2,값3,...,값n,end='끝낼값')"
+    },
+    {
+      "id": "blpmcqp",
+      "type": "paragraph",
+      "text": "예시이시유!",
+      "markdown": true
+    },
+    {
+      "id": "bnwpsdw",
+      "type": "code",
+      "language": "python",
+      "code": "print(\"시유는 멋지시유\",end='엣헴')"
+    },
+    {
+      "id": "bv2k9b6",
+      "type": "output",
+      "text": "시유는 멋지시유엣헴"
+    },
+    {
+      "id": "bghuwjs",
+      "type": "code",
+      "language": "python",
+      "code": "print(\"이렇게하면 이어쓰기가 \",end='')\nprint(\"가능하시유\",'신기하시유?',end='엣헴엣헴')"
+    },
+    {
+      "id": "b8e5wzv",
+      "type": "output",
+      "text": "이렇게하면 이어쓰기가 가능하시유 신기하시유?엣헴엣헴"
+    },
+    {
+      "id": "b00o6ow",
+      "type": "paragraph",
+      "text": "그러면 확인 문제 풀고 넘어가겠시유.",
+      "markdown": true
+    },
+    {
+      "id": "bzu8gm8",
+      "type": "output",
+      "text": "시유1171시유p\n#단, name,age,sep,end만 사용할 것."
+    },
+    {
+      "id": "bgddzah",
+      "type": "toggle",
+      "title": "정답 및 해설",
+      "text": "print(name,age,name,sep='1',end='p')  \n#===해설===  \n우선 name인 ```시유```와 age인 ```17``` 사이에 1이 있으니 sep='1'인걸 유추할 수 있시유.  \n또한 마지막에 p가 들어있으니 end='p'인 거시유.",
+      "markdown": true
+    },
+    {
+      "id": "bqi39vx",
+      "type": "paragraph",
+      "text": "---",
+      "markdown": true
+    },
+    {
+      "id": "bm4j962",
+      "type": "heading",
+      "level": 2,
+      "text": "3. 문자열에 변수 넣기"
+    },
+    {
+      "id": "bpe6xsa",
+      "type": "paragraph",
+      "text": "이번 내용은 진짜 짧시유.  \n코딩하다보면 문자열에 변수를 넣어야하시유.  \n이때 사용하는 것이 f-string이시유.  \nformat()방법도 있지만 f-string이 제일 많이 사용되시유.  \nㅤ  \n사용법은 매우 간단하시유.",
+      "markdown": true
+    },
+    {
+      "id": "bc4ep6g",
+      "type": "code",
+      "language": "python",
+      "code": "print(f\"{name}는 {age}살이시유\")"
+    },
+    {
+      "id": "b7jyhwm",
+      "type": "output",
+      "text": "시유는 17살이시유"
+    },
+    {
+      "id": "bvcfn1d",
+      "type": "paragraph",
+      "text": "{}안에는 넣을 변수를 넣고, 문자열 앞에는 f를 추가하면 되시유.  \nf-string은 변수에도 사용이 가능하시유.",
+      "markdown": true
+    },
+    {
+      "id": "bgl8r3q",
+      "type": "code",
+      "language": "python",
+      "code": "홍시 = f\"{name}가 좋아하시유.\"\nprint(홍시)"
+    },
+    {
+      "id": "bghzvhv",
+      "type": "output",
+      "text": "시유가 좋아하시유."
+    },
+    {
+      "id": "bucup8w",
+      "type": "paragraph",
+      "text": "축하하시유. 다 배웠시유.",
+      "markdown": true
+    },
+    {
+      "id": "bxomu68",
+      "type": "toggle",
+      "title": "format()배우기. 보고 싶으면 보시유.",
+      "text": "name = \"유니\"  \nage=18  \nㅤ  \nprint(\"{} 등장!\".format(name))  \nuni = '{}에요!! {}살이에요!!'.format(name,age)  \n#===출력===  \n유니 등장!  \n유니에요!! 18살이에요!!",
+      "markdown": true
+    },
+    {
+      "id": "bzw9o64",
+      "type": "paragraph",
+      "text": "---",
+      "markdown": true
+    },
+    {
+      "id": "bwkykx9",
+      "type": "heading",
+      "level": 2,
+      "text": "숙제"
+    },
+    {
+      "id": "bsboomz",
+      "type": "paragraph",
+      "text": "오늘 배운 내용 꼭 적용해서 풀길 바라시유.  \n꼭 문제 풀어오시유.",
+      "markdown": true
+    },
+    {
+      "id": "bsb6x6k",
+      "type": "code",
+      "language": "python",
+      "code": "seeu = \"시유\"\nuni = \"유니\"\nage1=17\nage2=18\nsecret=44.5"
+    },
+    {
+      "id": "bl88yti",
+      "type": "paragraph",
+      "text": "가정이시유.",
+      "markdown": true
+    },
+    {
+      "id": "bsy0otv",
+      "type": "output",
+      "text": "시유17시유시유p\n#단, seeu,age1,sep,end만 사용할 것."
+    },
+    {
+      "id": "bocvczr",
+      "type": "output",
+      "text": "cat 변수에  \n시유의 비밀은 44.5 입니다.\n을 저장하여 출력하시오.\n#단, 시유와 44.5를 직접 적으면 안된다."
+    },
+    {
+      "id": "ba49mt9",
+      "type": "output",
+      "text": "concert 변수에\n시유17과유니18은 그 꿈을 노래해.\n를 저장하여 출력하시오.\n#단. 시유,유니,17,18을 직접 적으면 안된다."
+    }
+  ]
+}
